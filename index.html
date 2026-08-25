@@ -334,6 +334,13 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .ud-qa-item:active{transform:scale(.96)}
 .ud-qa-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
 .ud-qa-lbl{font-size:.72rem;font-weight:600;color:var(--text);line-height:1.2}
+
+/* Full-screen lightbox for viewing chat photo attachments at full size */
+.doc-lightbox{position:fixed;inset:0;background:rgba(10,14,20,.94);z-index:5000;display:none;align-items:center;justify-content:center;padding:2.6rem 1rem 1rem}
+.doc-lightbox.open{display:flex}
+.doc-lightbox-close{position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);border:none;color:#fff;font-size:1.2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
+.doc-lightbox-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.doc-lightbox-body img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:6px}
 .wa-float{position:fixed;bottom:1.5rem;left:1.5rem;z-index:800;width:54px;height:54px;border-radius:50%;background:#25d366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;text-decoration:none}
 .wa-float:hover{transform:scale(1.12)}
 .wa-float:active{transform:scale(.94)}
@@ -785,6 +792,11 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
 <div class="toast" id="toast">
   <div class="tttl" id="tttl"></div>
   <div class="tmsg" id="tmsg"></div>
+</div>
+
+<div class="doc-lightbox" id="doc-lightbox" onclick="if(event.target===this)closeDocLightbox()">
+  <button class="doc-lightbox-close" onclick="closeDocLightbox()">&times;</button>
+  <div class="doc-lightbox-body" id="doc-lightbox-body"></div>
 </div>
 
 <a class="wa-float" href="https://wa.me/2349123213212?text=Hello%20Hotels%20Continental" target="_blank">
@@ -2499,6 +2511,17 @@ td{padding:.6rem .5rem;border-bottom:1px solid var(--border);white-space:nowrap}
 .spt-send-btn{background:var(--blue);color:#fff;border:none;border-radius:50%;width:40px;height:40px;flex-shrink:0;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center}
 .spt-send-btn:active{transform:scale(.92)}
 @media (max-width:760px){.spt-layout{flex-direction:column;align-items:stretch;position:relative}.spt-chat-wrap{width:100%}.spt-box{height:calc(100vh - 220px);width:100%}.spt-user-select{max-width:120px}.spt-head-icon{display:none}}
+
+/* Full-screen lightbox for viewing receipts and uploaded documents (used
+   instead of window.open, which opens as a tiny popup inside this
+   embedded admin iframe on many mobile browsers). */
+.doc-lightbox{position:fixed;inset:0;background:rgba(10,14,20,.94);z-index:5000;display:none;align-items:center;justify-content:center;padding:2.6rem 1rem 1rem}
+.doc-lightbox.open{display:flex}
+.doc-lightbox-close{position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);border:none;color:#fff;font-size:1.2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
+.doc-lightbox-title{position:absolute;top:1.1rem;left:1.1rem;color:rgba(255,255,255,.82);font-size:.8rem;font-weight:600;letter-spacing:.02em;right:3.2rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.doc-lightbox-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.doc-lightbox-body img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:6px}
+.doc-lightbox-body iframe{width:100%;height:100%;border:none;background:#fff;border-radius:6px}
 &lt;/style&gt;
 &lt;/head&gt;
 &lt;body&gt;
@@ -3472,6 +3495,8 @@ td{padding:.6rem .5rem;border-bottom:1px solid var(--border);white-space:nowrap}
 
 &lt;div class=&quot;toast&quot; id=&quot;toast&quot;&gt;&lt;b id=&quot;toast-title&quot;&gt;&lt;/b&gt;&lt;span id=&quot;toast-msg&quot;&gt;&lt;/span&gt;&lt;/div&gt;
 
+&lt;div class=&quot;doc-lightbox&quot; id=&quot;doc-lightbox&quot; onclick=&quot;if(event.target===this)closeDocLightbox()&quot;&gt;&lt;div class=&quot;doc-lightbox-title&quot; id=&quot;doc-lightbox-title&quot;&gt;&lt;/div&gt;&lt;button class=&quot;doc-lightbox-close&quot; onclick=&quot;closeDocLightbox()&quot;&gt;&amp;times;&lt;/button&gt;&lt;div class=&quot;doc-lightbox-body&quot; id=&quot;doc-lightbox-body&quot;&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;script&gt;
 /* Registered FIRST, before anything else can throw and abort the script.
    Surfaces any otherwise-silent runtime error (e.g. a failed CDN load, or a
@@ -3903,10 +3928,8 @@ function rejectWalletFunding(id) {
   }).catch(function() { T(&quot;Error&quot;, &quot;Could not reject this request.&quot;); });
 }
 function viewWalletFundingReceipt(id) {
-  var w = _allWalletFundings.find(function(x){ return x.id===id; }); if (!w || !w.receiptImage) return;
-  var win = window.open(&quot;&quot;);
-  win.document.write(&#x27;&lt;title&gt;Wallet Funding Receipt&lt;/title&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=5&quot;&gt;&lt;body style=&quot;margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh&quot;&gt;&#x27;+
-    &#x27;&lt;img src=&quot;&#x27;+w.receiptImage+&#x27;&quot; style=&quot;display:block;width:100vw;height:100vh;object-fit:contain&quot;/&gt;&lt;/body&gt;&#x27;);
+  var w = _allWalletFundings.find(function(x){ return x.id===id; }); if (!w) return;
+  showDocLightbox(w.receiptImage, &quot;Wallet Funding Receipt&quot;);
 }
 // This is only used to tell a super admin apart from a staff/sub-admin
 // after Firebase Authentication has already verified the password.
@@ -3948,6 +3971,19 @@ function T(title, msg, dur) {
   t.classList.add(&quot;show&quot;);
   clearTimeout(window._tTimer);
   window._tTimer = setTimeout(function(){ t.classList.remove(&quot;show&quot;); }, dur || 3200);
+}
+
+function showDocLightbox(url, title) {
+  if (!url) { T(&quot;No File&quot;, &quot;No file was uploaded.&quot;); return; }
+  var body = document.getElementById(&quot;doc-lightbox-body&quot;);
+  var isImg = /^data:image/.test(url) || /\.(png|jpe?g|gif|webp)($|\?)/i.test(url);
+  body.innerHTML = isImg ? &#x27;&lt;img src=&quot;&#x27; + url + &#x27;&quot;/&gt;&#x27; : &#x27;&lt;iframe src=&quot;&#x27; + url + &#x27;&quot;&gt;&lt;/iframe&gt;&#x27;;
+  document.getElementById(&quot;doc-lightbox-title&quot;).textContent = title || &quot;&quot;;
+  document.getElementById(&quot;doc-lightbox&quot;).classList.add(&quot;open&quot;);
+}
+function closeDocLightbox() {
+  document.getElementById(&quot;doc-lightbox&quot;).classList.remove(&quot;open&quot;);
+  document.getElementById(&quot;doc-lightbox-body&quot;).innerHTML = &quot;&quot;;
 }
 
 function closeModal(id){ document.getElementById(id).classList.remove(&quot;open&quot;); }
@@ -4961,16 +4997,7 @@ function setHBAdminTab(key) { _hbAdminTab = key; renderHotelBookingsAdmin(); }
 function viewHotelBookingReceipt(id) {
   var b = _allHotelBookings.find(function(x){ return x.id===id; });
   var url = b &amp;&amp; b.receiptURL;
-  if (!url) { T(&quot;No Receipt&quot;, &quot;No receipt was uploaded for this booking.&quot;); return; }
-  // Opened via window.open(url) directly, Chrome/most browsers silently block a new tab
-  // navigating straight to a data: URL (it shows a blank about:blank tab). Instead we open
-  // a blank window and write the image/file into it ourselves, which works reliably.
-  var w = window.open(&quot;&quot;);
-  if (!w) { T(&quot;Pop-up Blocked&quot;, &quot;Please allow pop-ups to view the receipt.&quot;); return; }
-  var isImg = /^data:image/.test(url);
-  w.document.write(&#x27;&lt;title&gt;Payment Receipt&lt;/title&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=5&quot;&gt;&lt;body style=&quot;margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh&quot;&gt;&#x27;+
-    (isImg ? &#x27;&lt;img src=&quot;&#x27;+url+&#x27;&quot; style=&quot;display:block;width:100vw;height:100vh;object-fit:contain&quot;/&gt;&#x27; : &#x27;&lt;iframe src=&quot;&#x27;+url+&#x27;&quot; style=&quot;width:100vw;height:100vh;border:none&quot;&gt;&lt;/iframe&gt;&#x27;) +
-    &#x27;&lt;/body&gt;&#x27;);
+  showDocLightbox(url, &quot;Payment Receipt&quot;);
 }
 function approveHotelBooking(id) {
   var b = _allHotelBookings.find(function(x){ return x.id===id; }); if (!b) return;
@@ -6066,7 +6093,7 @@ function renderHVGalleryThumbs(h) {
   var gal = (h.gallery &amp;&amp; h.gallery.length) ? h.gallery : (h.coverImage ? [h.coverImage] : []);
   if (!gal.length) return &#x27;&lt;div class=&quot;empty&quot; style=&quot;padding:.5rem 0&quot;&gt;No gallery photos yet.&lt;/div&gt;&#x27;;
   return gal.map(function(url, i){
-    return &#x27;&lt;div class=&quot;gal-thumb&quot;&gt;&lt;img src=&quot;&#x27;+url+&#x27;&quot;/&gt;&lt;button class=&quot;gal-rm&quot; title=&quot;Remove&quot; onclick=&quot;event.stopPropagation();removeHVGalleryPhoto(\&#x27;&#x27;+h.id+&#x27;\&#x27;,&#x27;+i+&#x27;)&quot;&gt;&amp;#10005;&lt;/button&gt;&lt;/div&gt;&#x27;;
+    return &#x27;&lt;div class=&quot;gal-thumb&quot;&gt;&lt;img src=&quot;&#x27;+url+&#x27;&quot; style=&quot;cursor:pointer&quot; onclick=&quot;showDocLightbox(\&#x27;&#x27;+url+&#x27;\&#x27;,\&#x27;Hotel Photo\&#x27;)&quot;/&gt;&lt;button class=&quot;gal-rm&quot; title=&quot;Remove&quot; onclick=&quot;event.stopPropagation();removeHVGalleryPhoto(\&#x27;&#x27;+h.id+&#x27;\&#x27;,&#x27;+i+&#x27;)&quot;&gt;&amp;#10005;&lt;/button&gt;&lt;/div&gt;&#x27;;
   }).join(&quot;&quot;);
 }
 function uploadHVGalleryPhoto(hotelId, input) {
@@ -6108,13 +6135,7 @@ function saveHVGallery(hotelId, gal) {
 function viewHVDocument(hotelId, idx) {
   var h = _hotelById[hotelId]; if (!h) return;
   var url = idx===0 ? h.bizDocURL : h.govIdURL;
-  if (!url) { T(&quot;No Document&quot;, &quot;No file was uploaded for this document.&quot;); return; }
-  var w = window.open(&quot;&quot;);
-  if (!w) { T(&quot;Pop-up Blocked&quot;, &quot;Please allow pop-ups to view the document.&quot;); return; }
-  var isImg = /^data:image/.test(url);
-  w.document.write(&#x27;&lt;title&gt;Hotel Document&lt;/title&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=5&quot;&gt;&lt;body style=&quot;margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh&quot;&gt;&#x27;+
-    (isImg ? &#x27;&lt;img src=&quot;&#x27;+url+&#x27;&quot; style=&quot;display:block;width:100vw;height:100vh;object-fit:contain&quot;/&gt;&#x27; : &#x27;&lt;iframe src=&quot;&#x27;+url+&#x27;&quot; style=&quot;width:100vw;height:100vh;border:none&quot;&gt;&lt;/iframe&gt;&#x27;) +
-    &#x27;&lt;/body&gt;&#x27;);
+  showDocLightbox(url, idx===0 ? &quot;Business Document&quot; : &quot;Government ID&quot;);
 }
 function setHVStatus(id, status) {
   var h = _hotelById[id]; if (!h) return;
@@ -6189,9 +6210,7 @@ function hrDocRow(label, url, name) {
 function hrViewDoc(label) {
   var r = _hotelRegById[_hrCurrentId]; if (!r) return;
   var url = label === &quot;Government ID&quot; ? r.govIdURL : r.bizDocURL;
-  if (!url) return;
-  var w = window.open(&quot;&quot;);
-  if (w) { w.document.write(&#x27;&lt;title&gt;&#x27;+label+&#x27;&lt;/title&gt;&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1, maximum-scale=5&quot;&gt;&lt;body style=&quot;margin:0;background:#111;display:flex;align-items:center;justify-content:center;min-height:100vh&quot;&gt;&#x27;+ (/^data:image/.test(url) ? &#x27;&lt;img src=&quot;&#x27;+url+&#x27;&quot; style=&quot;display:block;width:100vw;height:100vh;object-fit:contain&quot;/&gt;&#x27; : &#x27;&lt;iframe src=&quot;&#x27;+url+&#x27;&quot; style=&quot;width:100vw;height:100vh;border:none&quot;&gt;&lt;/iframe&gt;&#x27;) +&#x27;&lt;/body&gt;&#x27;); }
+  showDocLightbox(url, label);
 }
 function openHRDetail(id) {
   _hrCurrentId = id;
@@ -6209,7 +6228,7 @@ function openHRDetail(id) {
   }
   var gal = (r.gallery &amp;&amp; r.gallery.length) ? r.gallery : (r.coverImage ? [r.coverImage] : []);
   var galleryBlock = &#x27;&lt;div class=&quot;card-title&quot; style=&quot;margin-top:1.2rem&quot;&gt;Hotel Photos Submitted&lt;/div&gt;&#x27; +
-    (gal.length ? &#x27;&lt;div class=&quot;gal-thumbs&quot;&gt;&#x27;+gal.map(function(url){ return &#x27;&lt;div class=&quot;gal-thumb&quot;&gt;&lt;img src=&quot;&#x27;+url+&#x27;&quot;/&gt;&lt;/div&gt;&#x27;; }).join(&quot;&quot;)+&#x27;&lt;/div&gt;&#x27; : &#x27;&lt;div class=&quot;empty&quot; style=&quot;padding:.5rem 0&quot;&gt;No photos were submitted with this application.&lt;/div&gt;&#x27;);
+    (gal.length ? &#x27;&lt;div class=&quot;gal-thumbs&quot;&gt;&#x27;+gal.map(function(url){ return &#x27;&lt;div class=&quot;gal-thumb&quot;&gt;&lt;img src=&quot;&#x27;+url+&#x27;&quot; style=&quot;cursor:pointer&quot; onclick=&quot;showDocLightbox(\&#x27;&#x27;+url+&#x27;\&#x27;,\&#x27;Submitted Photo\&#x27;)&quot;/&gt;&lt;/div&gt;&#x27;; }).join(&quot;&quot;)+&#x27;&lt;/div&gt;&#x27; : &#x27;&lt;div class=&quot;empty&quot; style=&quot;padding:.5rem 0&quot;&gt;No photos were submitted with this application.&lt;/div&gt;&#x27;);
   document.getElementById(&quot;hr-detail-wrap&quot;).innerHTML =
     &#x27;&lt;div class=&quot;hv-card-top&quot; style=&quot;margin-bottom:1rem&quot;&gt;&#x27;+(gal.length ? &#x27;&lt;img src=&quot;&#x27;+gal[0]+&#x27;&quot; style=&quot;width:64px;height:64px;border-radius:10px;object-fit:cover;flex-shrink:0&quot;/&gt;&#x27; : &#x27;&lt;div class=&quot;hv-thumb&quot; style=&quot;width:64px;height:64px;font-size:1.6rem&quot;&gt;&amp;#127974;&lt;/div&gt;&#x27;)+&#x27;&lt;div style=&quot;flex:1&quot;&gt;&#x27;+
     &#x27;&lt;div style=&quot;font-weight:800;font-size:1.1rem&quot;&gt;&#x27;+esc(r.hotelName)+&#x27;&lt;/div&gt;&#x27;+
@@ -6708,7 +6727,7 @@ function openDisputeDetail(id, silent) {
   if (!d) { wrap.innerHTML = &#x27;&lt;div class=&quot;empty&quot;&gt;Dispute not found.&lt;/div&gt;&#x27;; return; }
 
   var evidence = (d.evidence||[]).map(function(url){
-    return &#x27;&lt;div class=&quot;gal-thumb&quot;&gt;&lt;img src=&quot;&#x27;+url+&#x27;&quot; style=&quot;width:100%;height:100%;object-fit:cover;cursor:pointer&quot; onclick=&quot;window.open(\&#x27;&#x27;+url+&#x27;\&#x27;,\&#x27;_blank\&#x27;)&quot;/&gt;&lt;/div&gt;&#x27;;
+    return &#x27;&lt;div class=&quot;gal-thumb&quot;&gt;&lt;img src=&quot;&#x27;+url+&#x27;&quot; style=&quot;width:100%;height:100%;object-fit:cover;cursor:pointer&quot; onclick=&quot;showDocLightbox(\&#x27;&#x27;+url+&#x27;\&#x27;,\&#x27;Dispute Evidence\&#x27;)&quot;/&gt;&lt;/div&gt;&#x27;;
   }).join(&quot;&quot;) || &#x27;&lt;div class=&quot;empty&quot; style=&quot;padding:.4rem 0&quot;&gt;No evidence uploaded.&lt;/div&gt;&#x27;;
 
   var actions = &quot;&quot;;
@@ -7045,7 +7064,7 @@ function sptOpenThread(uid, userName) {
       }
       var time = dateObj ? dateObj.toLocaleTimeString([], { hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot; }) : &quot;&quot;;
       var body;
-      if (m.type === &quot;image&quot;) { body = &#x27;&lt;img src=&quot;&#x27; + m.url + &#x27;&quot; onclick=&quot;window.open(this.src)&quot;/&gt;&#x27;; }
+      if (m.type === &quot;image&quot;) { body = &#x27;&lt;img src=&quot;&#x27; + m.url + &#x27;&quot; onclick=&quot;showDocLightbox(this.src,\&#x27;Attachment\&#x27;)&quot;/&gt;&#x27;; }
       else if (m.type === &quot;audio&quot;) { body = &#x27;&lt;div class=&quot;spt-audio-wrap&quot;&gt;&#x27; + VOICE_NOTE_ICON + &#x27;&lt;audio controls preload=&quot;metadata&quot; src=&quot;&#x27; + m.url + &#x27;&quot;&gt;&lt;/audio&gt;&lt;/div&gt;&#x27;; }
       else { body = esc(m.text); }
       var tick = mine ? &#x27; &lt;span class=&quot;spt-tick&quot;&gt;&amp;#10003;&amp;#10003;&lt;/span&gt;&#x27; : &quot;&quot;;
@@ -7543,6 +7562,16 @@ function T(t, m, d) {
   el.classList.add("show");
   clearTimeout(window._tt);
   window._tt = setTimeout(function() { el.classList.remove("show"); }, d);
+}
+
+function showDocLightbox(url) {
+  if (!url) return;
+  document.getElementById("doc-lightbox-body").innerHTML = '<img src="' + url + '"/>';
+  document.getElementById("doc-lightbox").classList.add("open");
+}
+function closeDocLightbox() {
+  document.getElementById("doc-lightbox").classList.remove("open");
+  document.getElementById("doc-lightbox-body").innerHTML = "";
 }
 
 // DATE SETUP
@@ -8213,7 +8242,7 @@ function chatBubbleHtml(m, mine, initials, idPrefix, idx) {
     if (!imgUrl) {
       inner = '<div class="chat-img-fallback" style="display:flex">&#9888;&#65039;<span>Photo failed to upload (no URL saved)</span></div>';
     } else {
-      inner = '<div class="chat-img-wrap"><img src="' + esc(imgUrl) + '" alt="Photo" onclick="window.open(this.src)" ' +
+      inner = '<div class="chat-img-wrap"><img src="' + esc(imgUrl) + '" alt="Photo" onclick="showDocLightbox(this.src)" ' +
         'onerror="console.warn(\'Image failed to load:\', this.src);this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'"/>' +
         '<div class="chat-img-fallback">&#128247;<span>Photo could not load</span><a href="' + esc(imgUrl) + '" target="_blank" rel="noopener" style="color:var(--gold);font-weight:600" onclick="event.stopPropagation()">Open link directly &#8599;</a></div></div>';
     }
