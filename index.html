@@ -25,8 +25,8 @@
   --shadow:0 4px 32px rgba(16,24,40,.08);--shadow-lg:0 16px 64px rgba(16,24,40,.14);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden}
+html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden;width:100%;position:relative}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-track{background:var(--cream)}
 ::-webkit-scrollbar-thumb{background:var(--gold-border);border-radius:3px}
@@ -93,8 +93,8 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
   .hz-quick-item .tt{font-size:.62rem}
   .hz-quick-item .dd{font-size:.5rem}
 }
-.hz-banner{width:100%;margin:1rem auto 0;max-width:640px}
-.hz-banner-in{background:var(--ink);border-radius:12px;padding:.8rem 1rem;position:relative;overflow:hidden}
+.hz-banner{width:100%;margin:1rem auto 0;max-width:640px;box-sizing:border-box}
+.hz-banner-in{background:var(--ink);border-radius:12px;padding:.8rem 1rem;position:relative;overflow:hidden;box-sizing:border-box}
 .hz-banner-tag{display:inline-block;background:var(--ha-gold);color:var(--ink);font-size:.58rem;font-weight:700;letter-spacing:.08em;padding:.2rem .5rem;border-radius:5px;margin-bottom:.3rem}
 .hz-banner-h{font-family:'Playfair Display',serif;color:#fff;font-size:1.02rem;font-weight:700}
 .hz-banner-p{color:rgba(255,255,255,.65);font-size:.72rem;margin-top:.15rem}
@@ -102,6 +102,11 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
 .hz-banner-price{color:var(--ha-gold);font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;text-align:right;flex-shrink:0;white-space:nowrap}
 .hz-banner-price small{display:block;font-family:'Jost',sans-serif;font-size:.56rem;color:rgba(255,255,255,.55);font-weight:400;letter-spacing:.04em}
 .hz-banner-btn{background:#fff;color:var(--ink);border:none;border-radius:8px;padding:.5rem 1.05rem;font-weight:700;font-size:.72rem;cursor:pointer;flex-shrink:0}
+@media(max-width:400px){
+  .hz-banner-row{flex-direction:column;align-items:stretch;gap:.6rem}
+  .hz-banner-price{text-align:left}
+  .hz-banner-btn{width:100%;text-align:center}
+}
 @media(max-width:860px){
   .hz-fields{grid-template-columns:repeat(6,1fr);grid-template-areas:"a a a a a a" "b b b c c c" "d d e e f f" "g g g g g g";}
   .hz-fields>.hz-fld:nth-child(1){grid-area:a}
@@ -301,6 +306,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .ud-refer-txt strong{display:block;font-size:.95rem;color:var(--ink)}
 .ud-refer-txt span{font-size:.8rem;color:var(--muted)}
 .ud-refer-btn{background:var(--ink);color:#fff;border:none;border-radius:9px;padding:.65rem 1.1rem;font-weight:700;font-size:.8rem;cursor:pointer;white-space:nowrap}
+
+/* Upcoming Booking — the main feature card on the Overview page */
+.ud-upcoming{background:#fff;border:1px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:1.2rem}
+.ud-upcoming-img{width:100%;height:150px;background:var(--surface2);position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:2.2rem;color:var(--muted2)}
+.ud-upcoming-img img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.ud-upcoming-status{position:absolute;top:.7rem;right:.7rem;font-size:.66rem;font-weight:700;padding:.25rem .65rem;border-radius:100px;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.ud-upcoming-status.approved{background:var(--green);color:#fff}
+.ud-upcoming-status.pending{background:#d97706;color:#fff}
+.ud-upcoming-status.rejected,.ud-upcoming-status.cancelled{background:var(--red);color:#fff}
+.ud-upcoming-body{padding:1.1rem 1.2rem}
+.ud-upcoming-name{font-family:'Playfair Display',serif;font-size:1.08rem;color:var(--ink);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ud-upcoming-loc{font-size:.78rem;color:var(--muted);margin-top:.25rem}
+.ud-upcoming-dates{display:flex;gap:1.6rem;margin-top:.85rem;padding-top:.85rem;border-top:1px solid var(--border);flex-wrap:wrap}
+.ud-upcoming-date-lbl{font-size:.62rem;color:var(--muted2);text-transform:uppercase;letter-spacing:.06em}
+.ud-upcoming-date-val{font-size:.85rem;font-weight:700;color:var(--text);margin-top:.15rem}
+.ud-upcoming-nights{font-size:.72rem;color:var(--gold);font-weight:600;margin-top:.7rem}
+.ud-upcoming-btn{width:100%;margin-top:.9rem;background:var(--gold);color:#fff;border:none;border-radius:9px;padding:.7rem;font-weight:700;font-size:.82rem;cursor:pointer}
+.ud-upcoming-empty{padding:2.4rem 1.2rem;text-align:center}
+.ud-upcoming-empty .ei{font-size:2rem;display:block;margin-bottom:.6rem;color:var(--muted2)}
+.ud-upcoming-empty p{color:var(--muted);font-size:.85rem;margin-bottom:1rem}
+
+/* Quick Access shortcuts grid on the Overview page */
+.ud-qa-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem;margin-bottom:1.2rem}
+@media(max-width:480px){.ud-qa-grid{grid-template-columns:repeat(2,1fr)}}
+.ud-qa-item{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem .5rem;display:flex;flex-direction:column;align-items:center;gap:.5rem;cursor:pointer;box-shadow:var(--shadow);text-align:center;transition:transform .15s}
+.ud-qa-item:active{transform:scale(.96)}
+.ud-qa-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.ud-qa-lbl{font-size:.72rem;font-weight:600;color:var(--text);line-height:1.2}
 .wa-float{position:fixed;bottom:1.5rem;left:1.5rem;z-index:800;width:54px;height:54px;border-radius:50%;background:#25d366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;text-decoration:none}
 .wa-float:hover{transform:scale(1.12)}
 .wa-float:active{transform:scale(.94)}
@@ -1432,21 +1465,27 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
           </div>
         </div>
 
-        <div class="ud-card">
-          <div class="ud-card-head"><span>Recent Bookings</span><a onclick="accOpenSub('bookings')">View All</a></div>
-          <div id="ud-recent-bookings"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
-        </div>
+        <div class="fst" style="margin:0 0 .6rem">Upcoming Booking</div>
+        <div class="ud-upcoming" id="ud-upcoming"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
 
         <div class="ud-two-col">
-          <div class="ud-card">
-            <div class="ud-card-head"><span>Wishlist</span><a onclick="accOpenSub('wishlist')">View All</a></div>
-            <div id="ud-wishlist-mini"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
-          </div>
           <div class="ud-card">
             <div class="ud-card-head"><span>Recommended For You</span><a onclick="SP('hotels')">View All</a></div>
             <div id="ud-recommend-mini"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
             <button class="sagain" style="width:100%;margin-top:.8rem" onclick="SP('hotels')">Explore More Hotels &#8250;</button>
           </div>
+          <div class="ud-card">
+            <div class="ud-card-head"><span>Wishlist</span><a onclick="accOpenSub('wishlist')">View All</a></div>
+            <div id="ud-wishlist-mini"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
+          </div>
+        </div>
+
+        <div class="fst" style="margin:0 0 .6rem">Quick Access</div>
+        <div class="ud-qa-grid">
+          <div class="ud-qa-item" onclick="accOpenSub('bookings')"><div class="ud-qa-ico" style="background:var(--purple-bg);color:var(--purple)">&#128197;</div><div class="ud-qa-lbl">My Bookings</div></div>
+          <div class="ud-qa-item" onclick="SP('hotels')"><div class="ud-qa-ico" style="background:var(--gold-dim);color:var(--gold)">&#127974;</div><div class="ud-qa-lbl">Find Hotels</div></div>
+          <div class="ud-qa-item" onclick="accOpenSub('payments')"><div class="ud-qa-ico" style="background:var(--blue-bg);color:var(--blue)">&#128179;</div><div class="ud-qa-lbl">Wallet</div></div>
+          <div class="ud-qa-item" onclick="accOpenSub('chats')"><div class="ud-qa-ico" style="background:var(--teal-bg);color:var(--teal)">&#128172;</div><div class="ud-qa-lbl">Messages</div></div>
         </div>
 
         <div class="ud-refer-banner" onclick="accOpenSub('refer')">
@@ -1981,7 +2020,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
   --sb-w:270px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;overflow-x:hidden;width:100%}
 body{font-family:&#x27;Inter&#x27;,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;font-size:14px}
 ::-webkit-scrollbar{width:5px}
 ::-webkit-scrollbar-thumb{background:var(--blue-bd);border-radius:3px}
@@ -8979,38 +9018,17 @@ function accShowMenu() {
   accRenderDashboard();
 }
 
-// Populates the "Welcome back" overview screen: stat cards, recent
-// bookings, wishlist preview and recommended-hotels preview.
+// Populates the "Welcome back" overview screen: stat cards, the upcoming
+// booking hero card, wishlist preview and recommended-hotels preview.
 function accRenderDashboard() {
   accFetchAllBookings().then(function(docs) {
     var bkEl = document.getElementById("ud-stat-bookings"); if (bkEl) bkEl.textContent = docs.length;
     var spent = docs.reduce(function(s, b) { return s + (b._src === "hotel" ? (b.amount || 0) : (b.amountPaid || 0)); }, 0);
     var spEl = document.getElementById("ud-stat-spent"); if (spEl) spEl.textContent = "\u20a6" + Math.round(spent).toLocaleString();
-    var recentWrap = document.getElementById("ud-recent-bookings");
-    if (recentWrap) {
-      if (!docs.length) { recentWrap.innerHTML = '<div class="emst"><span class="ei">&#128197;</span>No bookings yet.</div>'; }
-      else {
-        recentWrap.innerHTML = docs.slice(0, 3).map(function(b) {
-          var isHotel = b._src === "hotel";
-          var name = isHotel ? (b.hotelName || "Hotel Booking") : (b.roomType || "Hotels Continental");
-          var status = b.status || "Pending";
-          var statusCls = status === "Approved" ? "approved" : status === "Rejected" ? "rejected" : status === "CheckedOut" ? "approved" : "pending";
-          var amount = isHotel ? (b.amount || 0) : (b.amountPaid || 0);
-          var nights = 1;
-          if (b.checkIn && b.checkOut) { nights = Math.max(1, Math.round((new Date(b.checkOut) - new Date(b.checkIn)) / 86400000)); }
-          return '<div class="ud-recent-row">' +
-            '<div class="ud-recent-thumb">&#127974;</div>' +
-            '<div class="ud-recent-mid"><div class="ud-recent-name">' + esc(name) + '</div>' +
-            '<div class="ud-recent-sub"><span>&#128198; ' + esc(b.checkIn || "") + (b.checkOut ? " &ndash; " + esc(b.checkOut) : "") + '</span></div></div>' +
-            '<div class="ud-recent-right"><div class="ud-status ' + statusCls + '">' + esc(status === "CheckedOut" ? "Checked Out" : status) + '</div>' +
-            '<div class="ud-recent-amt">\u20a6' + Math.round(amount).toLocaleString() + '</div>' +
-            '<div class="ud-recent-nights">' + nights + ' Night' + (nights > 1 ? "s" : "") + '</div></div></div>';
-        }).join("");
-      }
-    }
+    accRenderUpcomingBooking(docs);
   }).catch(function() {
-    var recentWrap = document.getElementById("ud-recent-bookings");
-    if (recentWrap) recentWrap.innerHTML = '<div class="emst"><span class="ei">&#9888;</span>Could not load bookings.</div>';
+    var up = document.getElementById("ud-upcoming");
+    if (up) up.innerHTML = '<div class="emst"><span class="ei">&#9888;</span>Could not load bookings.</div>';
   });
 
   var wlEl = document.getElementById("ud-stat-wishlist"); if (wlEl) wlEl.textContent = (_accWishlist || []).length;
@@ -9046,6 +9064,66 @@ function accRenderDashboard() {
     };
     if (_mpHotels && _mpHotels.length) showRecommended();
     else loadMarketplaceHotels().then(showRecommended).catch(function() { recWrap.innerHTML = '<div class="emst"><span class="ei">&#9888;</span>Could not load hotels.</div>'; });
+  }
+}
+
+// Picks the single most relevant booking to feature on the Overview page:
+// the soonest stay that hasn't checked out yet and hasn't been rejected or
+// cancelled. Falls back to "No Upcoming Bookings" when nothing qualifies.
+function accRenderUpcomingBooking(docs) {
+  var up = document.getElementById("ud-upcoming");
+  if (!up) return;
+  var today = new Date(); today.setHours(0, 0, 0, 0);
+  var candidates = docs.filter(function(b) {
+    var status = b.status || "Pending";
+    if (status === "Rejected" || status === "Cancelled" || status === "CheckedOut") return false;
+    if (!b.checkOut) return false;
+    var co = new Date(b.checkOut);
+    return !isNaN(co) && co >= today;
+  });
+  candidates.sort(function(a, b) {
+    var da = a.checkIn ? new Date(a.checkIn).getTime() : Infinity;
+    var db = b.checkIn ? new Date(b.checkIn).getTime() : Infinity;
+    return da - db;
+  });
+  var b = candidates[0];
+  if (!b) {
+    up.innerHTML = '<div class="ud-upcoming-empty"><span class="ei">&#128197;</span>' +
+      '<p>No Upcoming Bookings</p>' +
+      '<button class="fsub" style="width:auto;padding:.7rem 1.3rem" onclick="SP(\'hotels\')">Explore Hotels</button></div>';
+    return;
+  }
+  var isHotel = b._src === "hotel";
+  var name = isHotel ? (b.hotelName || "Hotel Booking") : "Hotels Continental";
+  var status = b.status || "Pending";
+  var statusCls = status === "Approved" ? "approved" : status === "Rejected" ? "rejected" : "pending";
+  var nights = 1;
+  if (b.checkIn && b.checkOut) nights = Math.max(1, Math.round((new Date(b.checkOut) - new Date(b.checkIn)) / 86400000));
+  var renderCard = function(hotel) {
+    var img = hotel && hotel.coverImage ? '<img src="' + hotel.coverImage + '"/>' : '&#127974;';
+    var loc = (hotel && hotel.location) || (isHotel ? "" : "Lagos, Nigeria");
+    up.innerHTML = '<div class="ud-upcoming-img">' + img +
+      '<div class="ud-upcoming-status ' + statusCls + '">' + esc(status) + '</div></div>' +
+      '<div class="ud-upcoming-body">' +
+      '<div class="ud-upcoming-name">' + esc(name) + '</div>' +
+      (loc ? '<div class="ud-upcoming-loc">&#128205; ' + esc(loc) + '</div>' : '') +
+      '<div class="ud-upcoming-dates">' +
+      '<div><div class="ud-upcoming-date-lbl">Check-in</div><div class="ud-upcoming-date-val">' + esc(b.checkIn || "-") + '</div></div>' +
+      '<div><div class="ud-upcoming-date-lbl">Check-out</div><div class="ud-upcoming-date-val">' + esc(b.checkOut || "-") + '</div></div>' +
+      '</div>' +
+      '<div class="ud-upcoming-nights">' + nights + ' Night' + (nights > 1 ? "s" : "") + '</div>' +
+      '<button class="ud-upcoming-btn" onclick="accOpenSub(\'bookings\')">View Booking</button>' +
+      '</div>';
+  };
+  if (isHotel && b.hotelId) {
+    var lookup = function() {
+      var hotel = (_mpHotels || []).filter(function(h) { return h.id === b.hotelId; })[0];
+      renderCard(hotel);
+    };
+    if (_mpHotels && _mpHotels.length) lookup();
+    else loadMarketplaceHotels().then(lookup).catch(function() { renderCard(null); });
+  } else {
+    renderCard(null);
   }
 }
 
@@ -11279,10 +11357,13 @@ function statCardMain(icon, color, bg, label, val) {
 // Show the "Top Pick" promo banner at the bottom of every customer-facing
 // page (not on the admin panel or hotel-owner dashboard).
 (function injectTopPickBanner() {
-  var bannerHTML = '<div class="hz-banner" style="max-width:640px;margin:0 auto 1rem"><div class="hz-banner-in"><span class="hz-banner-tag">TOP PICKS</span><div class="hz-banner-h">Get More Visibility for Your Hotel</div><div class="hz-banner-p">List your property as a Top Pick and reach thousands of travelers.</div><div class="hz-banner-row"><button class="hz-banner-btn" onclick="SP(\'registerhotel\')">Become a Top Pick</button><div class="hz-banner-price">&#8358;5,000<small>per month</small></div></div></div></div>';
-  var excluded = ["page-admin", "page-hoteldash"];
+  var bannerHTML = '<div class="hz-banner" style="max-width:640px;margin:0 auto 1rem;box-sizing:border-box"><div class="hz-banner-in"><span class="hz-banner-tag">TOP PICKS</span><div class="hz-banner-h">Get More Visibility for Your Hotel</div><div class="hz-banner-p">List your property as a Top Pick and reach thousands of travelers.</div><div class="hz-banner-row"><button class="hz-banner-btn" onclick="SP(\'registerhotel\')">Become a Top Pick</button><div class="hz-banner-price">&#8358;5,000<small>per month</small></div></div></div></div>';
+  // Only the hotel-partner page gets this injected banner. The homepage
+  // already has its own instance in the markup, and it should not appear
+  // anywhere else (account pages, bookings, hotel listings, dashboards, etc.).
+  var included = ["page-registerhotel"];
   document.querySelectorAll(".page").forEach(function(pg) {
-    if (excluded.indexOf(pg.id) !== -1) return;
+    if (included.indexOf(pg.id) === -1) return;
     if (pg.querySelector(".hz-banner")) return;
     var wrap = document.createElement("div");
     wrap.innerHTML = bannerHTML;
