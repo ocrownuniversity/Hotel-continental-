@@ -252,11 +252,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
   .hd-ham{display:none}
   .bpw{max-width:1060px}
 }
-.ud-welcome h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--ink)}
+.ud-welcome h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--ink);overflow-wrap:anywhere;max-width:100%}
 .ud-welcome p{color:var(--muted);font-size:.85rem;margin-top:.25rem}
 .ud-banner{background:linear-gradient(135deg,var(--ink),#132b52);border-radius:18px;padding:1.5rem;color:#fff;margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;justify-content:space-between}
-.ud-banner-left{display:flex;align-items:center;gap:1rem}
-.ud-banner-name{font-family:'Playfair Display',serif;font-size:1.15rem}
+.ud-banner-left{display:flex;align-items:center;gap:1rem;min-width:0;flex:1}
+.ud-banner-name{font-family:'Playfair Display',serif;font-size:1.15rem;overflow-wrap:anywhere;max-width:100%}
 .ud-banner-badge{font-size:.66rem;color:var(--gold2);background:rgba(255,255,255,.12);display:inline-block;padding:.18rem .6rem;border-radius:100px;margin-top:.3rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
 .ud-banner-since{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:.4rem}
 .ud-banner-right{min-width:200px}
@@ -341,7 +341,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .doc-lightbox-close{position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);border:none;color:#fff;font-size:1.2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
 .doc-lightbox-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
 .doc-lightbox-body img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:6px}
-.wa-float{position:fixed;bottom:1.5rem;left:1.5rem;z-index:800;width:54px;height:54px;border-radius:50%;background:#25d366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;text-decoration:none}
+.wa-float{position:fixed;bottom:1.1rem;left:1.1rem;z-index:800;width:46px;height:46px;border-radius:50%;background:#25d366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;text-decoration:none}
 .wa-float:hover{transform:scale(1.12)}
 .wa-float:active{transform:scale(.94)}
 .page{display:none;min-height:100vh;padding-top:62px}
@@ -549,34 +549,34 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
    quick-action buttons, a 4-tile overview grid, and a transaction list with
    colored direction icons. Built as generic classes so both pages reuse the
    same markup/JS helpers instead of duplicating styles. ── */
-.wal-hero{background:linear-gradient(135deg,var(--ink) 0%,#173a6b 100%);border-radius:18px;padding:1.5rem 1.4rem;color:#fff;margin-bottom:1.1rem;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.wal-hero{background:linear-gradient(135deg,var(--ink) 0%,#173a6b 100%);border-radius:16px;padding:.9rem 1rem;color:#fff;margin-bottom:.7rem;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
 .wal-hero-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
-.wal-hero-lbl{font-size:.68rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.09em;display:flex;align-items:center;gap:.4rem}
-.wal-eye{cursor:pointer;opacity:.75;font-size:.85rem;background:none;border:none;color:#fff}
-.wal-add-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:.72rem;font-weight:600;padding:.45rem .85rem;border-radius:100px;cursor:pointer;white-space:nowrap}
+.wal-hero-lbl{font-size:.62rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:.35rem}
+.wal-eye{cursor:pointer;opacity:.75;font-size:.78rem;background:none;border:none;color:#fff}
+.wal-add-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:.66rem;font-weight:600;padding:.35rem .7rem;border-radius:100px;cursor:pointer;white-space:nowrap}
 .wal-add-btn:hover{background:rgba(255,255,255,.22)}
-.wal-bal{font-family:'Playfair Display',serif;font-size:2.15rem;margin:.35rem 0 1rem;letter-spacing:.01em}
-.wal-split{display:flex;gap:1.6rem;font-size:.76rem;color:rgba(255,255,255,.85);flex-wrap:wrap}
-.wal-split b{display:block;font-size:.92rem;color:#fff;margin-top:.15rem;font-weight:600}
-.wal-qa-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-bottom:1.1rem}
-.wal-qa-btn{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:.85rem .4rem;display:flex;flex-direction:column;align-items:center;gap:.4rem;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s}
+.wal-bal{font-family:'Playfair Display',serif;font-size:1.5rem;margin:.2rem 0 .55rem;letter-spacing:.01em}
+.wal-split{display:flex;gap:1.2rem;font-size:.68rem;color:rgba(255,255,255,.85);flex-wrap:wrap}
+.wal-split b{display:block;font-size:.8rem;color:#fff;margin-top:.1rem;font-weight:600}
+.wal-qa-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.7rem}
+.wal-qa-btn{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:.55rem .3rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s}
 .wal-qa-btn:active{transform:scale(.95)}
-.wal-qa-ico{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.05rem}
-.wal-qa-lbl{font-size:.66rem;font-weight:600;color:var(--text);text-align:center;line-height:1.2}
-.wal-ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.55rem;margin-bottom:1.1rem}
+.wal-qa-ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem}
+.wal-qa-lbl{font-size:.6rem;font-weight:600;color:var(--text);text-align:center;line-height:1.15}
+.wal-ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.7rem}
 @media(max-width:520px){.wal-ov-grid{grid-template-columns:repeat(2,1fr)}}
-.wal-ov-card{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:.85rem .7rem;box-shadow:var(--shadow)}
-.wal-ov-ico{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-bottom:.5rem}
-.wal-ov-val{font-weight:700;font-size:.86rem;color:var(--text)}
-.wal-ov-lbl{font-size:.64rem;color:var(--muted);margin-top:.15rem}
-.wal-tx-row{display:flex;align-items:center;gap:.75rem;padding:.75rem 0;border-bottom:1px solid var(--border)}
+.wal-ov-card{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:.55rem .55rem;box-shadow:var(--shadow)}
+.wal-ov-ico{width:20px;height:20px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.68rem;margin-bottom:.3rem}
+.wal-ov-val{font-weight:700;font-size:.78rem;color:var(--text)}
+.wal-ov-lbl{font-size:.6rem;color:var(--muted);margin-top:.1rem}
+.wal-tx-row{display:flex;align-items:center;gap:.6rem;padding:.55rem 0;border-bottom:1px solid var(--border)}
 .wal-tx-row:last-child{border-bottom:none}
-.wal-tx-ico{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
-.wal-tx-title{font-weight:600;font-size:.84rem}
-.wal-tx-sub{font-size:.7rem;color:var(--muted);margin-top:.1rem}
-.wal-tx-amt{font-weight:700;font-size:.84rem;white-space:nowrap;text-align:right}
-.wal-secure{background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:13px;padding:.9rem 1rem;display:flex;align-items:center;gap:.7rem;font-size:.76rem;color:var(--text);margin-top:1.1rem}
-.wal-secure b{display:block;font-size:.8rem;margin-bottom:.1rem}
+.wal-tx-ico{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.wal-tx-title{font-weight:600;font-size:.8rem}
+.wal-tx-sub{font-size:.66rem;color:var(--muted);margin-top:.1rem}
+.wal-tx-amt{font-weight:700;font-size:.8rem;white-space:nowrap;text-align:right}
+.wal-secure{background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:11px;padding:.6rem .8rem;display:flex;align-items:center;gap:.6rem;font-size:.7rem;color:var(--text);margin-top:.7rem}
+.wal-secure b{display:block;font-size:.75rem;margin-bottom:.1rem}
 .bkc{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.1rem;margin-bottom:.75rem;box-shadow:var(--shadow);animation:fu .4s ease}
 .bkh{display:flex;align-items:flex-start;justify-content:space-between;gap:.55rem;flex-wrap:wrap}
 .bkn{font-family:'Playfair Display',serif;font-size:1.15rem}
@@ -1423,7 +1423,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
         <div id="acc-topbar-notif" onclick="accOpenSub('notifications')" style="position:relative;cursor:pointer;font-size:1.15rem;color:var(--ink);flex-shrink:0" title="Notifications">&#128276;<span id="acc-topbar-notif-badge" style="display:none;position:absolute;top:-4px;right:-6px;background:var(--red);color:#fff;font-size:.6rem;font-weight:700;border-radius:100px;min-width:15px;height:15px;align-items:center;justify-content:center;padding:0 .25rem">0</span></div>
         <div id="acc-topbar-avatar" onclick="accOpenSub('profile')" style="width:36px;height:36px;border-radius:50%;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gold);overflow:hidden;flex-shrink:0;cursor:pointer" title="My Profile">U</div>
       </div>
-    <div class="bpw" style="max-width:1060px;padding-top:1.4rem">
+    <div class="bpw" style="max-width:1060px;padding-top:.8rem">
       <div id="acc-app" style="display:none">
         <div class="ud-welcome">
           <h2 id="ud-welcome-name">Welcome back! &#128075;</h2>
@@ -1433,7 +1433,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
         <div class="ud-banner">
           <div class="ud-banner-left">
             <div id="acc-avatar" style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;overflow:hidden;flex-shrink:0">U</div>
-            <div>
+            <div style="min-width:0;flex:1">
               <div class="ud-banner-name" id="acc-name">Guest</div>
               <span class="ud-banner-badge" id="acc-role">Member</span>
               <div class="ud-banner-since" id="acc-member-since"></div>
@@ -1509,8 +1509,8 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
 
       <!-- Account sub-pages -->
       <div class="hxout" id="acc-sub" style="display:none;max-width:640px;padding:0">
-        <button class="sagain" onclick="accShowMenu()" style="margin-bottom:1rem">&#8592; Back to Account</button>
-        <div id="acc-sub-title" class="fst" style="margin-bottom:1rem"></div>
+        <button class="sagain" onclick="accShowMenu()" style="margin-bottom:.6rem">&#8592; Back to Account</button>
+        <div id="acc-sub-title" class="fst" style="margin-bottom:.5rem;padding-bottom:.35rem;font-size:1.05rem"></div>
         <div id="acc-sub-body"></div>
       </div>
     </div>
@@ -1943,7 +1943,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
       <div id="hd-tab-wallet" class="hd-tab" style="display:none">
         <div id="hd-wallet-hero"></div>
         <div id="hd-wallet-qa"></div>
-        <div class="fst" style="margin:1.2rem 0 .6rem">Wallet Overview</div>
+        <div class="fst" style="margin:.7rem 0 .35rem;padding-bottom:.3rem;font-size:1rem">Wallet Overview</div>
         <div id="hd-wallet-overview"></div>
         <div class="fc" style="margin:1.1rem 0" id="hd-withdraw-form">
           <div class="fst" style="margin-bottom:.8rem">Request Withdrawal</div>
@@ -9496,7 +9496,7 @@ function accRenderPayments(body) {
     html += '<div id="fw-panel" style="display:none">' + fwPanelHTML() + '</div>';
     html += '<div id="wd-panel" style="display:none">' + wdPanelHTML() + '</div>';
 
-    html += '<div class="fst" style="margin:1.2rem 0 .6rem">Wallet Overview</div>';
+    html += '<div class="fst" style="margin:.7rem 0 .35rem;padding-bottom:.3rem;font-size:1rem">Wallet Overview</div>';
     html += walOverviewHTML([
       { icon: "&#8595;", color: "var(--green)", bg: "var(--green-bg)", value: "\u20a6" + Math.round(moneyInMonth).toLocaleString(), label: "Money In This Month" },
       { icon: "&#8593;", color: "var(--red)", bg: "var(--red-bg)", value: "\u20a6" + Math.round(moneyOutMonth).toLocaleString(), label: "Money Out This Month" },
@@ -9504,7 +9504,7 @@ function accRenderPayments(body) {
       { icon: "&#128202;", color: "var(--blue)", bg: "var(--blue-bg)", value: tx.length, label: "Total Transactions" }
     ]);
 
-    html += '<div class="fst" style="margin:1.2rem 0 .4rem" id="acc-wal-tx-list">Recent Transactions</div>';
+    html += '<div class="fst" style="margin:.7rem 0 .25rem;padding-bottom:.3rem;font-size:1rem" id="acc-wal-tx-list">Recent Transactions</div>';
     html += tx.length
       ? '<div class="lcard" style="padding:.3rem 1.1rem">' + tx.slice(0, 20).map(walTxRowHTML).join("") + '</div>'
       : '<div class="emst"><span class="ei">&#128179;</span>No transactions yet.</div>';
