@@ -359,9 +359,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .doc-lightbox-close{position:absolute;top:.9rem;right:.9rem;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.14);border:none;color:#fff;font-size:1.2rem;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
 .doc-lightbox-body{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
 .doc-lightbox-body img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:6px}
-.wa-float{position:fixed;bottom:1.1rem;left:1.1rem;z-index:800;width:46px;height:46px;border-radius:50%;background:#25d366;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;text-decoration:none}
-.wa-float:hover{transform:scale(1.12)}
-.wa-float:active{transform:scale(.94)}
 .page{display:none;min-height:100vh;padding-top:62px}
 .page.active{display:block}
 .hero{min-height:calc(100vh - 62px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3.5rem 1.5rem;position:relative;overflow:hidden;background:var(--ink)}
@@ -602,6 +599,28 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .wal-promo span{color:var(--muted)}
 .wal-promo .chev{margin-left:auto;color:var(--muted2);flex-shrink:0}
 .wal-tx-viewall{font-size:.68rem;font-weight:600;color:var(--gold);cursor:pointer}
+/* Customer "Payments & Wallet" hero card + transaction rows (distinct from
+   the shared .wal-* classes above so the hotel partner Wallet tab is untouched) */
+.cw-hero{background:linear-gradient(135deg,var(--ink) 0%,#173a6b 100%);border-radius:16px;padding:1.3rem 1.3rem 1.4rem;color:#fff;margin-bottom:.9rem;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.cw-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem}
+.cw-hero-lbl{font-size:.68rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:.4rem}
+.cw-eye{cursor:pointer;opacity:.75;font-size:.85rem;background:none;border:none;color:#fff;padding:0}
+.cw-hero-illus{font-size:2.4rem;line-height:1;opacity:.9;flex-shrink:0}
+.cw-bal{font-family:'Playfair Display',serif;font-size:2.1rem;margin:.55rem 0 .1rem;letter-spacing:.01em}
+.cw-bal-cap{font-size:.72rem;color:rgba(255,255,255,.55);margin-bottom:.6rem}
+.cw-hero-sub{font-size:.74rem;color:rgba(255,255,255,.7);padding-top:.6rem;border-top:1px solid rgba(255,255,255,.14)}
+.cw-hero-btn{width:100%;margin-top:.9rem;background:var(--gold);color:#fff;border:none;border-radius:10px;padding:.75rem;font-weight:700;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.cw-hero-btn:active{transform:scale(.98)}
+.cw-tx-row{display:flex;align-items:center;gap:.65rem;padding:.65rem 0;border-bottom:1px solid var(--border)}
+.cw-tx-row:last-child{border-bottom:none}
+.cw-tx-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
+.cw-tx-title{font-weight:600;font-size:.82rem;color:var(--text)}
+.cw-tx-sub{font-size:.68rem;color:var(--muted);margin-top:.15rem}
+.cw-tx-right{text-align:right;flex-shrink:0}
+.cw-tx-amt{font-weight:700;font-size:.82rem;white-space:nowrap}
+.cw-tx-pill{display:inline-block;margin-top:.3rem;font-size:.6rem;font-weight:700;padding:.15rem .5rem;border-radius:100px;white-space:nowrap}
+.cw-tx-pill.ok{background:var(--green-bg);color:var(--green)}
+.cw-tx-pill.pending{background:rgba(181,130,10,.12);color:#b5820a}
 .bkc{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.1rem;margin-bottom:.75rem;box-shadow:var(--shadow);animation:fu .4s ease}
 .bkh{display:flex;align-items:flex-start;justify-content:space-between;gap:.55rem;flex-wrap:wrap}
 .bkn{font-family:'Playfair Display',serif;font-size:1.15rem}
@@ -831,10 +850,6 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
   <button class="doc-lightbox-close" onclick="closeDocLightbox()">&times;</button>
   <div class="doc-lightbox-body" id="doc-lightbox-body"></div>
 </div>
-
-<a class="wa-float" href="https://wa.me/2349123213212?text=Hello%20Hotels%20Continental" target="_blank">
-  <svg viewBox="0 0 24 24" fill="white" width="28"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-</a>
 
 <nav>
   <button class="nbrand" onclick="SP('home')">
@@ -1458,10 +1473,30 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
             <div style="min-width:0;flex:1">
               <div class="ud-banner-name" id="acc-name">Guest</div>
               <div class="ud-banner-email" id="acc-email-vis"></div>
-              <div class="ud-banner-since" id="acc-member-since"></div>
+              <span class="ud-banner-badge" id="acc-role" style="margin-top:.4rem;display:inline-block">Member</span>
+              <div class="ud-banner-since" id="acc-member-since" style="margin-top:.4rem"></div>
             </div>
           </div>
-          <span class="ud-banner-badge" id="acc-role" style="align-self:flex-start">Member</span>
+          <div class="ud-banner-right" style="text-align:right">
+            <div class="ud-wallet-lbl" style="display:flex;align-items:center;justify-content:flex-end;gap:.35rem">Wallet Balance<button class="ud-wallet-eye" id="acc-wallet-eye" onclick="accToggleWalletVisibility()">&#128065;</button></div>
+            <div class="ud-wallet-row" style="justify-content:flex-end"><span class="ud-wallet-val" id="acc-wallet-val">&#8358;0</span></div>
+            <button class="ud-topup-btn" onclick="accGoTopUp()">&#128179; Top Up Wallet</button>
+          </div>
+        </div>
+
+        <div class="lcard" id="acc-pc-card" style="padding:1.1rem 1.2rem;margin:0 0 .8rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
+          <div style="flex:1;min-width:220px">
+            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem">
+              <div style="width:34px;height:34px;border-radius:9px;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0">&#128737;</div>
+              <div style="font-weight:700;font-size:.92rem;color:var(--ink)">Profile Completion</div>
+            </div>
+            <div style="display:flex;align-items:center;gap:.65rem">
+              <div style="flex:1;height:7px;background:var(--surface2);border-radius:100px;overflow:hidden"><div id="acc-pc-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:100px;transition:width .4s"></div></div>
+              <div style="font-size:.78rem;font-weight:700;color:var(--text);white-space:nowrap" id="acc-pc-pct">0%</div>
+            </div>
+            <div style="font-size:.74rem;color:var(--muted);margin-top:.5rem" id="acc-pc-msg"></div>
+          </div>
+          <button class="ab absv" id="acc-pc-btn" onclick="accOpenSub('profile')" style="white-space:nowrap;padding:.6rem 1.05rem">Complete Profile &#8594;</button>
         </div>
 
         <div class="ud-stat-row">
@@ -9047,6 +9082,38 @@ function accRenderHeader() {
   }
   accShowMenu();
   accRenderWalletSummary();
+  accUpdateProfileCompletion(p);
+}
+
+// Drives the "Profile Completion" card on the My Profile page: base 60%
+// for having an account (name + email are always set at signup), plus 20%
+// for a profile photo and 20% for a saved phone number.
+function accUpdateProfileCompletion(p) {
+  var bar = document.getElementById("acc-pc-bar");
+  if (!bar) return;
+  var pct = 60;
+  var missing = [];
+  if (p.photoURL) pct += 20; else missing.push("a profile photo");
+  if (p.phone) pct += 20; else missing.push("your phone number");
+  document.getElementById("acc-pc-pct").textContent = pct + "%";
+  bar.style.width = pct + "%";
+  var msgEl = document.getElementById("acc-pc-msg");
+  var btnEl = document.getElementById("acc-pc-btn");
+  if (missing.length) {
+    msgEl.textContent = "Add " + missing.join(" and ") + " to complete your profile.";
+    if (btnEl) btnEl.style.display = "";
+  } else {
+    msgEl.textContent = "Your profile is all set. Nice work!";
+    if (btnEl) btnEl.style.display = "none";
+  }
+}
+
+// "Top Up Wallet" on the My Profile banner jumps to Payments & Wallet and
+// opens the fund panel once that page has finished loading.
+var _accAutoOpenFund = false;
+function accGoTopUp() {
+  _accAutoOpenFund = true;
+  accOpenSub("payments");
 }
 
 // Opens/closes the account sidebar drawer (same pattern as the hotel dashboard)
@@ -9443,7 +9510,7 @@ function accRenderPayments(body) {
       if (t.positive) moneyInMonth += t.amount; else moneyOutMonth += t.amount;
     });
 
-    var html = walHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "Top Up Wallet", addOnclick: "accToggleFundWallet()", secondaryLabel: "Bank Transfer", secondaryOnclick: "accToggleFundWallet();accSelectFundMethod('manual')" });
+    var html = cwHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "Top Up Wallet", addOnclick: "accToggleFundWallet()" });
 
     html += walQaRowHTML([
       { icon: "&#128179;", color: "var(--gold)", bg: "var(--gold-dim)", label: "Add Money", sub: "Instant top up", onclick: "accToggleFundWallet()" },
@@ -9467,13 +9534,41 @@ function accRenderPayments(body) {
 
     html += '<div class="fst" style="margin:.7rem 0 .25rem;padding-bottom:.3rem;font-size:1rem;display:flex;align-items:center;justify-content:space-between" id="acc-wal-tx-list"><span>Recent Transactions</span>' + (tx.length > 4 ? '<span class="wal-tx-viewall" onclick="walToggleTxAll(\'acc-wal\')" id="acc-wal-tx-viewall">View All</span>' : '') + '</div>';
     html += tx.length
-      ? '<div class="lcard" style="padding:.3rem 1.1rem"><div id="acc-wal-tx-visible">' + tx.slice(0, 4).map(walTxRowHTML).join("") + '</div><div id="acc-wal-tx-rest" style="display:none">' + tx.slice(4, 20).map(walTxRowHTML).join("") + '</div></div>'
+      ? '<div class="lcard" style="padding:.3rem 1.1rem"><div id="acc-wal-tx-visible">' + tx.slice(0, 4).map(cwTxRowHTML).join("") + '</div><div id="acc-wal-tx-rest" style="display:none">' + tx.slice(4, 20).map(cwTxRowHTML).join("") + '</div></div>'
       : '<div class="emst"><span class="ei">&#128179;</span>No transactions yet.</div>';
 
     html += '<div class="wal-secure"><span style="font-size:1.3rem">&#128274;</span><div><b>Your wallet is secure</b>All transactions are encrypted and your funds are safe with us.</div></div>';
 
     body.innerHTML = html;
+    if (_accAutoOpenFund) { _accAutoOpenFund = false; accToggleFundWallet(); }
   }).catch(function(e) { console.error(e); body.innerHTML = '<div class="emst"><span class="ei">&#9888;</span>Could not load payments.</div>'; });
+}
+
+// ── Customer "Payments & Wallet" specific hero + transaction row markup
+// (kept separate from the shared wal*HTML helpers above, which the hotel
+// partner "Wallet" tab also uses, so this styling only affects this page) ──
+function cwHeroHTML(scope, opts) {
+  var totalStr = "\u20a6" + Math.round(opts.total).toLocaleString();
+  return '<div class="cw-hero">' +
+    '<div class="cw-hero-top">' +
+      '<div class="cw-hero-lbl">Available Balance <button class="cw-eye" id="' + scope + '-eye" onclick="walEyeToggle(\'' + scope + '\')">&#128065;</button></div>' +
+      '<div class="cw-hero-illus">&#128176;</div>' +
+    '</div>' +
+    '<div class="cw-bal" id="' + scope + '-bal-val" data-real="' + totalStr + '" data-hidden="0">' + totalStr + '</div>' +
+    '<div class="cw-bal-cap">Total Balance</div>' +
+    '<div class="cw-hero-sub">Available \u20a6' + Math.round(opts.available).toLocaleString() + ' &nbsp;&middot;&nbsp; Pending \u20a6' + Math.round(opts.pending).toLocaleString() + '</div>' +
+    (opts.addOnclick ? '<button class="cw-hero-btn" onclick="' + opts.addOnclick + '">&#10133; ' + (opts.addLabel || "Top Up Wallet") + '</button>' : '') +
+    '</div>';
+}
+function cwTxRowHTML(it) {
+  var amtColor = it.positive ? "var(--green)" : "var(--red)";
+  var sign = it.positive ? "+" : "-";
+  var pending = /\(Pending\)/.test(it.title);
+  var pillClass = pending ? "pending" : "ok";
+  var pillLabel = pending ? "Pending" : "Successful";
+  return '<div class="cw-tx-row"><div class="cw-tx-ico" style="background:' + it.bg + ';color:' + it.color + '">' + it.icon + '</div>' +
+    '<div style="flex:1;min-width:0"><div class="cw-tx-title">' + esc(it.title) + '</div><div class="cw-tx-sub">' + esc(it.sub) + '</div></div>' +
+    '<div class="cw-tx-right"><div class="cw-tx-amt" style="color:' + amtColor + '">' + sign + '\u20a6' + Math.round(it.amount).toLocaleString() + '</div><span class="cw-tx-pill ' + pillClass + '">' + pillLabel + '</span></div></div>';
 }
 
 function fwPanelHTML() {
