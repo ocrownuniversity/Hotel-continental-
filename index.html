@@ -3516,7 +3516,7 @@ window.addEventListener(&quot;error&quot;, function(ev){
     loginScreen.style.display = &quot;flex&quot;;
   }
   if (err) {
-    err.textContent = &quot;A script error occurred: &quot; + (ev.message || &quot;unknown&quot;) + &quot;. Check the browser console (F12) for details.&quot;;
+    err.textContent = &quot;Something went wrong loading the page. Please refresh and try again.&quot;;
     err.classList.add(&quot;show&quot;);
   }
 });
@@ -3703,7 +3703,7 @@ function addRoomNumber(roomId) {
     input.value = &quot;&quot;;
     renderRooms();
     T(&quot;Room Added&quot;, &quot;Room &quot; + num + &quot; added to &quot; + r.name + &quot;.&quot;);
-  }).catch(function() { T(&quot;Error&quot;, &quot;Could not add room. Check Firestore rules.&quot;); });
+  }).catch(function() { T(&quot;Error&quot;, &quot;Could not add room. Please try again.&quot;); });
 }
 function removeRoomNumber(roomId, num) {
   var r = _roomsList.find(function(x){ return x.id === roomId; }); if (!r) return;
@@ -3712,7 +3712,7 @@ function removeRoomNumber(roomId, num) {
     r.roomNumbers = updated;
     renderRooms();
     T(&quot;Room Removed&quot;, &quot;Room &quot; + num + &quot; removed from &quot; + r.name + &quot;.&quot;);
-  }).catch(function() { T(&quot;Error&quot;, &quot;Could not remove room. Check Firestore rules.&quot;); });
+  }).catch(function() { T(&quot;Error&quot;, &quot;Could not remove room. Please try again.&quot;); });
 }
 function uploadRoomImage(roomId, input) {
   var file = input.files &amp;&amp; input.files[0];
@@ -3723,7 +3723,7 @@ function uploadRoomImage(roomId, input) {
       if (r) r.imageURL = dataUrl;
       renderRooms();
       T(&quot;Photo Updated&quot;, &quot;Photo is now live on the website.&quot;);
-    }).catch(function() { T(&quot;Error&quot;, &quot;Could not save photo. Check Firestore rules.&quot;); });
+    }).catch(function() { T(&quot;Error&quot;, &quot;Could not save photo. Please try again.&quot;); });
   }, { maxBytes: 600000, maxDim: 1000, minDim: 300, onError: function(){ T(&quot;Error&quot;, &quot;Could not process that photo.&quot;); } });
   input.value = &quot;&quot;;
 }
@@ -4006,7 +4006,7 @@ function adminLogin() {
   // silent, uncaught error — which looks exactly like &quot;the button is not
   // reacting&quot;. Catch that case explicitly and tell the user what happened.
   if (typeof firebase === &quot;undefined&quot; || !auth) {
-    err.textContent = &quot;Could not reach Firebase (check your internet connection or ad-blocker) and reload the page.&quot;;
+    err.textContent = &quot;Could not connect to the server. Check your internet connection or ad-blocker, then reload the page.&quot;;
     err.classList.add(&quot;show&quot;);
     return;
   }
@@ -4055,17 +4055,17 @@ function adminLogin() {
     // account not created vs. network/config issues) are easy to tell apart.
     var code = e &amp;&amp; e.code ? e.code : &quot;&quot;;
     if (code === &quot;auth/user-not-found&quot;) {
-      err.textContent = &quot;No account exists for this email in Firebase Authentication. Create it in the Firebase Console first.&quot;;
+      err.textContent = &quot;No account exists for this email. Please contact the super admin to have an account created.&quot;;
     } else if (code === &quot;auth/wrong-password&quot; || code === &quot;auth/invalid-credential&quot;) {
       err.textContent = &quot;Incorrect password for this email.&quot;;
     } else if (code === &quot;auth/invalid-email&quot;) {
       err.textContent = &quot;That email address is not valid.&quot;;
     } else if (code === &quot;auth/network-request-failed&quot;) {
-      err.textContent = &quot;Network error reaching Firebase. Check your connection and try again.&quot;;
+      err.textContent = &quot;No internet connection. Please check your network and try again.&quot;;
     } else if (code === &quot;auth/too-many-requests&quot;) {
       err.textContent = &quot;Too many attempts. Please wait a moment and try again.&quot;;
     } else {
-      err.textContent = &quot;Sign-in failed&quot; + (code ? &quot; (&quot; + code + &quot;)&quot; : &quot;&quot;) + &quot;. Check the browser console for details.&quot;;
+      err.textContent = &quot;Sign-in failed. Please try again, or contact support if the problem continues.&quot;;
     }
     err.classList.add(&quot;show&quot;);
   });
@@ -4392,7 +4392,7 @@ function loadAll() {
   }).catch(function(e){
     console.error(e);
     document.getElementById(&quot;loader&quot;).style.display = &quot;none&quot;;
-    T(&quot;Load error&quot;, &quot;Could not load platform data. Check Firestore rules.&quot;);
+    T(&quot;Load error&quot;, &quot;Could not load platform data. Please try again.&quot;);
   });
 }
 
@@ -5306,7 +5306,7 @@ function clearTestData() {
     console.error(e);
     progress.textContent = &quot;&quot;;
     btn.disabled = false;
-    T(&quot;Error&quot;, &quot;Could not clear all selected data. Check Firestore rules and try again.&quot;, 6000);
+    T(&quot;Error&quot;, &quot;Could not clear all selected data. Please try again.&quot;, 6000);
   });
 }
 
@@ -5445,7 +5445,7 @@ function setUserRole(id, role) {
   db.collection(&quot;users&quot;).doc(id).update({role: role}).then(function(){
     u.role = role; renderUsersList(); renderUsersStats(); renderUsersTabs(); renderUsersCharts();
     T(&quot;Role Updated&quot;, (u.name||u.email||&quot;This user&quot;) + &quot; is now &quot; + (ROLE_LABEL[role]||role) + &quot;.&quot;);
-  }).catch(function(){ u.role = prevRole; renderUsersList(); T(&quot;Error&quot;, &quot;Could not update role. Check Firestore rules.&quot;); });
+  }).catch(function(){ u.role = prevRole; renderUsersList(); T(&quot;Error&quot;, &quot;Could not update role. Please try again.&quot;); });
 }
 function cycleUserStatus(id) {
   var u = _allUsers.find(function(x){ return x.id===id; }); if (!u) return;
@@ -5928,7 +5928,7 @@ function deleteSubAdmin(id) {
   db.collection(&quot;subadmins&quot;).doc(id).delete().then(function(){
     _allSubAdmins = _allSubAdmins.filter(function(sa){ return sa.id!==id; });
     renderSubAdmins();
-    T(&quot;Removed&quot;, &quot;Sub-admin access to the dashboard is revoked. Their Firebase Auth sign-in still exists — delete it in the Firebase Console (Authentication &gt; Users) to remove it completely.&quot;, 5000);
+    T(&quot;Removed&quot;, &quot;Sub-admin access to the dashboard has been revoked. Their sign-in account still exists in the system \u2014 contact your developer if it needs to be fully deleted.&quot;, 5000);
   });
 }
 
@@ -6133,7 +6133,7 @@ function saveHVGallery(hotelId, gal) {
       &#x27;&lt;label class=&quot;gal-add&quot;&gt;+&lt;input type=&quot;file&quot; accept=&quot;image/*&quot; multiple style=&quot;display:none&quot; onchange=&quot;uploadHVGalleryPhoto(\&#x27;&#x27;+hotelId+&#x27;\&#x27;,this)&quot;/&gt;&lt;/label&gt;&#x27;;
     renderHV();
     T(&quot;Gallery Updated&quot;, &quot;The hotel&#x27;s photo gallery is now live on the Marketplace.&quot;);
-  }).catch(function(){ T(&quot;Error&quot;, &quot;Could not update the gallery. Check Firestore rules.&quot;); });
+  }).catch(function(){ T(&quot;Error&quot;, &quot;Could not update the gallery. Please try again.&quot;); });
 }
 function viewHVDocument(hotelId, idx) {
   var h = _hotelById[hotelId]; if (!h) return;
@@ -7078,7 +7078,7 @@ function sptOpenThread(uid, userName) {
   }, function(err) {
     console.error(&quot;Support chat listener error:&quot;, err);
     var el = document.getElementById(&quot;spt-msgs&quot;);
-    if (el) el.innerHTML = &#x27;&lt;div class=&quot;empty&quot;&gt;Could not load this conversation. Check Firestore rules.&lt;/div&gt;&#x27;;
+    if (el) el.innerHTML = &#x27;&lt;div class=&quot;empty&quot;&gt;Could not load this conversation. Please try again.&lt;/div&gt;&#x27;;
   });
 }
 
@@ -8197,6 +8197,30 @@ function hrRemoveGalleryFile(i) {
 
 function esc(s) { return (s == null ? "" : String(s)).replace(/[&<>"']/g, function(c) { return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
 
+// Maps backend/SDK error codes to plain, user-facing wording so raw
+// technical error text (which can name the backend service, security
+// rules, etc.) never reaches the screen.
+function friendlyError(e) {
+  var code = (e && e.code) || "";
+  var map = {
+    "auth/email-already-in-use": "An account with this email already exists. Please sign in instead.",
+    "auth/invalid-email": "Please enter a valid email address.",
+    "auth/weak-password": "Please choose a stronger password (at least 6 characters).",
+    "auth/wrong-password": "Incorrect email or password. Please try again.",
+    "auth/user-not-found": "No account found with this email. Please check and try again.",
+    "auth/invalid-credential": "Incorrect email or password. Please try again.",
+    "auth/too-many-requests": "Too many attempts. Please wait a moment and try again.",
+    "auth/network-request-failed": "No internet connection. Please check your network and try again.",
+    "auth/popup-closed-by-user": "Sign-in was closed before it finished. Please try again.",
+    "auth/user-disabled": "This account has been disabled. Please contact support.",
+    "auth/expired-action-code": "This link has expired. Please request a new one.",
+    "auth/invalid-action-code": "This link is invalid or has already been used.",
+    "permission-denied": "You don't have permission to do that right now.",
+    "unavailable": "No internet connection. Please check your network and try again."
+  };
+  return map[code] || "Something went wrong. Please check your connection and try again.";
+}
+
 // ── Shared voice-note recording helpers (used by the customer "Contact
 // Admin" chat). A waveform-bars icon is used instead of a microphone
 // silhouette for the idle state, and a filled square for the recording/
@@ -8394,7 +8418,7 @@ function submitHotelRegistration() {
           document.getElementById("hrsuccess").style.display = "block";
           btn.disabled = false; btn.textContent = "\uD83C\uDFE8 Submit Application";
         }).catch(function(e) {
-          T("Submission Failed", e.message || "Could not submit your application. Please try again.", 6000);
+          T("Submission Failed", "Could not submit your application. Please check your connection and try again.", 6000);
           btn.disabled = false; btn.textContent = "\uD83C\uDFE8 Submit Application";
         });
       }, function(errMsg) {
@@ -8826,7 +8850,7 @@ function accSignup() {
       T("Welcome!", "Your account has been created." + (validReferrer ? " Referral code applied!" : ""));
     }).catch(function(e) {
       if (btn) { btn.disabled = false; btn.textContent = "Create Account"; }
-      err.textContent = e.message || "Could not create account.";
+      err.textContent = friendlyError(e);
       err.classList.add("show");
     });
   }
@@ -8901,7 +8925,7 @@ function accGoogleSignIn() {
     }
   }).catch(function(e) {
     if (e && (e.code === "auth/popup-closed-by-user" || e.code === "auth/cancelled-popup-request")) return;
-    T("Sign-In Failed", (e && e.message) || "Could not sign in with Google.");
+    T("Sign-In Failed", (e && e.code) ? friendlyError(e) : "Could not sign in with Google.");
   });
 }
 
@@ -9699,10 +9723,7 @@ function accRenderChats(body) {
     }).join("");
   }).catch(function(e) {
     console.error("accRenderChats failed:", e);
-    var reason = (e && e.code === "permission-denied")
-      ? "You don't have permission to view messages yet (Firestore security rules for \"hotelChats\" need to allow a signed-in user to read documents where uid == request.auth.uid)."
-      : "Could not load your messages (" + (e && e.message ? e.message : "unknown error") + ").";
-    body.innerHTML = '<div class="emst"><span class="ei">&#128172;</span>' + esc(reason) + '</div>';
+    body.innerHTML = '<div class="emst"><span class="ei">&#128172;</span>Could not load your messages. Please try again later.</div>';
   });
 }
 
@@ -9845,9 +9866,8 @@ function accSendSupportImage(file) {
     }, { merge: true });
   }).catch(function(err) {
     console.error("Could not send image:", err);
-    var detail = err && (err.code || err.message) ? " (" + (err.code || err.message) + ")" : "";
-    T("Error", "Could not send the image." + detail, 8000);
-    accInsertLocalError("Photo upload failed: " + (err && (err.code || err.message) || "unknown error"));
+    T("Error", "Could not send the image. Please check your connection and try again.", 8000);
+    accInsertLocalError("Could not send the photo. Please check your connection and try again.");
   }).finally(function() {
     var el = document.getElementById("acc-support-img-input");
     if (el) el.value = "";
@@ -9909,7 +9929,7 @@ function accUploadSupportAudio(blob) {
   var timer = setTimeout(function() {
     timedOut = true;
     T("Error", "Sending the voice note is taking too long. Check your connection and try again.", 8000);
-    accInsertLocalError("Voice note upload timed out after 20s (path: " + path + "). This usually means the request never reached Firebase Storage — check your network connection.");
+    accInsertLocalError("The voice note is taking too long to send. Please check your network connection and try again.");
   }, 20000);
   storage.ref().child(path).put(blob, { contentType: blob.type || "audio/webm" }).then(function(snap) {
     return snap.ref.getDownloadURL();
@@ -9924,10 +9944,9 @@ function accUploadSupportAudio(blob) {
     }, { merge: true });
   }).catch(function(err) {
     console.error("Could not send voice note:", err);
-    var detail = err && (err.code || err.message) ? " (" + (err.code || err.message) + ")" : "";
     if (!timedOut) {
-      T("Error", "Could not send the voice note." + detail, 8000);
-      accInsertLocalError("Voice note upload failed: " + (err && (err.code || err.message) || "unknown error"));
+      T("Error", "Could not send the voice note. Please check your connection and try again.", 8000);
+      accInsertLocalError("Could not send the voice note. Please check your connection and try again.");
     }
   }).finally(function() { clearTimeout(timer); });
 }
@@ -10955,10 +10974,7 @@ function hdLoadMessageThreads() {
     }).join("");
   }).catch(function(e) {
     console.error("hdLoadMessageThreads failed:", e);
-    var reason = (e && e.code === "permission-denied")
-      ? "Your account doesn't have permission to view messages yet. This is a Firestore security-rules setting, not a bug in the page \u2014 the \"hotelChats\" collection needs a rule allowing a hotel partner to read/list documents where hotelId == request.auth.uid."
-      : "Could not load messages (" + (e && e.message ? e.message : "unknown error") + ").";
-    wrap.innerHTML = '<div class="empty">' + esc(reason) + '</div>';
+    wrap.innerHTML = '<div class="empty">Could not load your messages. Please try again later.</div>';
   });
 }
 
