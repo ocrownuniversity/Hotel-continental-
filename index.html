@@ -252,13 +252,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
   .hd-ham{display:none}
   .bpw{max-width:1060px}
 }
-.ud-welcome h2{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--ink);overflow-wrap:anywhere;max-width:100%}
-.ud-welcome p{color:var(--muted);font-size:.85rem;margin-top:.25rem}
-.ud-banner{background:linear-gradient(135deg,var(--ink),#132b52);border-radius:18px;padding:1.5rem;color:#fff;margin:1.2rem 0;display:flex;flex-wrap:wrap;gap:1.2rem;align-items:center;justify-content:space-between}
-.ud-banner-left{display:flex;align-items:center;gap:1rem;min-width:0;flex:1}
-.ud-banner-name{font-family:'Playfair Display',serif;font-size:1.15rem;overflow-wrap:anywhere;max-width:100%}
-.ud-banner-badge{font-size:.66rem;color:var(--gold2);background:rgba(255,255,255,.12);display:inline-block;padding:.18rem .6rem;border-radius:100px;margin-top:.3rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase}
-.ud-banner-since{font-size:.72rem;color:rgba(255,255,255,.55);margin-top:.4rem}
+.ud-welcome h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--ink);overflow-wrap:anywhere;max-width:100%}
+.ud-welcome p{color:var(--muted);font-size:.82rem;margin-top:.2rem}
+.ud-banner{background:linear-gradient(135deg,var(--ink),#132b52);border-radius:16px;padding:1.1rem 1.2rem;color:#fff;margin:.8rem 0;display:flex;flex-wrap:wrap;gap:.8rem;align-items:flex-start;justify-content:space-between}
+.ud-banner-left{display:flex;align-items:center;gap:.85rem;min-width:0;flex:1}
+.ud-banner-name{font-family:'Playfair Display',serif;font-size:1.08rem;overflow-wrap:anywhere;max-width:100%}
+.ud-banner-email{font-size:.74rem;color:rgba(255,255,255,.65);margin-top:.15rem;overflow-wrap:anywhere}
+.ud-banner-badge{font-size:.62rem;color:var(--gold2);background:rgba(255,255,255,.12);display:inline-block;padding:.16rem .55rem;border-radius:100px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+.ud-banner-since{font-size:.68rem;color:rgba(255,255,255,.55);margin-top:.25rem}
 .ud-banner-right{min-width:200px}
 .ud-wallet-lbl{font-size:.66rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem}
 .ud-wallet-row{display:flex;align-items:center;gap:.55rem}
@@ -272,6 +273,24 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .ud-stat-lbl{font-size:.78rem;color:var(--muted)}
 .ud-stat-val{font-size:1.4rem;font-weight:800;color:var(--text);margin-top:.15rem}
 .ud-stat-link{font-size:.72rem;color:var(--gold);font-weight:600;margin-top:.4rem}
+
+/* Compact single-row stat strip + settings lists (Overview / My Profile page) */
+.ud-stat-row{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr)}
+.ud-stat-col{padding:.75rem .3rem;text-align:center;cursor:pointer;border-right:1px solid var(--border)}
+.ud-stat-col:last-child{border-right:none}
+.ud-stat-col-ico{font-size:1rem;margin-bottom:.3rem}
+.ud-stat-col-val{font-size:.95rem;font-weight:800;color:var(--text)}
+.ud-stat-col-lbl{font-size:.62rem;color:var(--muted);margin-top:.1rem}
+.ud-list{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.ud-list-item{display:flex;align-items:center;gap:.7rem;padding:.7rem .9rem;border-bottom:1px solid var(--border);cursor:pointer}
+.ud-list-item:last-child{border-bottom:none}
+.ud-list-item:active{background:var(--surface2)}
+.ud-list-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.ud-list-mid{flex:1;min-width:0}
+.ud-list-title{font-size:.82rem;font-weight:600;color:var(--text)}
+.ud-list-sub{font-size:.68rem;color:var(--muted);margin-top:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ud-list-chev{color:var(--muted2);font-size:1rem;flex-shrink:0}
+.ud-logout-btn{width:100%;margin:1rem 0 .5rem;background:#fff;border:1px solid var(--red-bd,rgba(217,38,38,.35));color:var(--red);border-radius:12px;padding:.8rem;font-weight:700;font-size:.85rem;cursor:pointer}
 .ud-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.2rem;box-shadow:var(--shadow);margin-bottom:1.2rem}
 .ud-card-head{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:.98rem;color:var(--ink);margin-bottom:.9rem}
 .ud-card-head a{color:var(--gold);font-size:.78rem;font-weight:600;cursor:pointer}
@@ -553,16 +572,18 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .wal-hero-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
 .wal-hero-lbl{font-size:.62rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:.35rem}
 .wal-eye{cursor:pointer;opacity:.75;font-size:.78rem;background:none;border:none;color:#fff}
-.wal-add-btn{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);color:#fff;font-size:.66rem;font-weight:600;padding:.35rem .7rem;border-radius:100px;cursor:pointer;white-space:nowrap}
-.wal-add-btn:hover{background:rgba(255,255,255,.22)}
-.wal-bal{font-family:'Playfair Display',serif;font-size:1.5rem;margin:.2rem 0 .55rem;letter-spacing:.01em}
-.wal-split{display:flex;gap:1.2rem;font-size:.68rem;color:rgba(255,255,255,.85);flex-wrap:wrap}
-.wal-split b{display:block;font-size:.8rem;color:#fff;margin-top:.1rem;font-weight:600}
+.wal-bal{font-family:'Playfair Display',serif;font-size:1.65rem;margin:.2rem 0 .3rem;letter-spacing:.01em}
+.wal-hero-sub{font-size:.66rem;color:rgba(255,255,255,.6)}
+.wal-hero-btns{display:flex;gap:.5rem;margin-top:.75rem}
+.wal-btn{flex:1;border-radius:9px;padding:.55rem;font-weight:700;font-size:.72rem;cursor:pointer;white-space:nowrap;border:none}
+.wal-btn-primary{background:var(--gold);color:#fff}
+.wal-btn-secondary{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
 .wal-qa-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.7rem}
 .wal-qa-btn{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:.55rem .3rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s}
 .wal-qa-btn:active{transform:scale(.95)}
 .wal-qa-ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.88rem}
 .wal-qa-lbl{font-size:.6rem;font-weight:600;color:var(--text);text-align:center;line-height:1.15}
+.wal-qa-sub{font-size:.52rem;color:var(--muted);text-align:center;margin-top:.1rem;line-height:1.1}
 .wal-ov-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.7rem}
 @media(max-width:520px){.wal-ov-grid{grid-template-columns:repeat(2,1fr)}}
 .wal-ov-card{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:.55rem .55rem;box-shadow:var(--shadow)}
@@ -577,6 +598,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .wal-tx-amt{font-weight:700;font-size:.8rem;white-space:nowrap;text-align:right}
 .wal-secure{background:var(--gold-dim);border:1px solid var(--gold-border);border-radius:11px;padding:.6rem .8rem;display:flex;align-items:center;gap:.6rem;font-size:.7rem;color:var(--text);margin-top:.7rem}
 .wal-secure b{display:block;font-size:.75rem;margin-bottom:.1rem}
+.wal-promo{background:var(--blue-bg);border:1px solid var(--blue-bd);border-radius:11px;padding:.65rem .8rem;display:flex;align-items:center;gap:.6rem;font-size:.7rem;color:var(--text);margin-bottom:.7rem;cursor:pointer}
+.wal-promo b{display:block;font-size:.74rem;color:var(--ink);margin-bottom:.1rem}
+.wal-promo span{color:var(--muted)}
+.wal-promo .chev{margin-left:auto;color:var(--muted2);flex-shrink:0}
+.wal-tx-viewall{font-size:.68rem;font-weight:600;color:var(--gold);cursor:pointer}
 .bkc{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.1rem;margin-bottom:.75rem;box-shadow:var(--shadow);animation:fu .4s ease}
 .bkh{display:flex;align-items:flex-start;justify-content:space-between;gap:.55rem;flex-wrap:wrap}
 .bkn{font-family:'Playfair Display',serif;font-size:1.15rem}
@@ -1426,8 +1452,8 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
     <div class="bpw" style="max-width:1060px;padding-top:.8rem">
       <div id="acc-app" style="display:none">
         <div class="ud-welcome">
-          <h2 id="ud-welcome-name">Welcome back! &#128075;</h2>
-          <p>Manage your bookings, wishlist, profile and more.</p>
+          <h2 id="ud-welcome-name">My Profile</h2>
+          <p>Manage your account and preferences.</p>
         </div>
 
         <div class="ud-banner">
@@ -1435,76 +1461,56 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
             <div id="acc-avatar" style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;overflow:hidden;flex-shrink:0">U</div>
             <div style="min-width:0;flex:1">
               <div class="ud-banner-name" id="acc-name">Guest</div>
-              <span class="ud-banner-badge" id="acc-role">Member</span>
+              <div class="ud-banner-email" id="acc-email-vis"></div>
               <div class="ud-banner-since" id="acc-member-since"></div>
-              <div id="acc-email" style="display:none"></div>
             </div>
           </div>
-          <div class="ud-banner-right">
-            <div class="ud-wallet-lbl">Wallet Balance</div>
-            <div class="ud-wallet-row">
-              <div class="ud-wallet-val" id="acc-wallet-val">&#8358;0.00</div>
-              <button type="button" class="ud-wallet-eye" onclick="accToggleWalletVisibility()" id="acc-wallet-eye">&#128065;</button>
-            </div>
-            <button type="button" class="ud-topup-btn" onclick="accOpenSub('payments')">&#128179; Top Up Wallet</button>
+          <span class="ud-banner-badge" id="acc-role" style="align-self:flex-start">Member</span>
+        </div>
+
+        <div class="ud-stat-row">
+          <div class="ud-stat-col" onclick="accOpenSub('bookings')">
+            <div class="ud-stat-col-ico" style="color:var(--purple)">&#128197;</div>
+            <div class="ud-stat-col-val" id="ud-stat-bookings">0</div>
+            <div class="ud-stat-col-lbl">Bookings</div>
+          </div>
+          <div class="ud-stat-col" onclick="accOpenSub('wishlist')">
+            <div class="ud-stat-col-ico" style="color:var(--green)">&#9825;</div>
+            <div class="ud-stat-col-val" id="ud-stat-wishlist">0</div>
+            <div class="ud-stat-col-lbl">Wishlist</div>
+          </div>
+          <div class="ud-stat-col" onclick="accOpenSub('bookings')">
+            <div class="ud-stat-col-ico" style="color:#d97706">&#128176;</div>
+            <div class="ud-stat-col-val" id="ud-stat-spent">&#8358;0</div>
+            <div class="ud-stat-col-lbl">Spent</div>
+          </div>
+          <div class="ud-stat-col" onclick="accOpenSub('inbox')">
+            <div class="ud-stat-col-ico" style="color:var(--teal)">&#128172;</div>
+            <div class="ud-stat-col-val" id="ud-stat-messages">0</div>
+            <div class="ud-stat-col-lbl">Messages</div>
           </div>
         </div>
 
-        <div class="ud-stats">
-          <div class="ud-stat-card" onclick="accOpenSub('bookings')">
-            <div class="ud-stat-ico" style="background:var(--purple-bg);color:var(--purple)">&#128197;</div>
-            <div class="ud-stat-lbl">Total Bookings</div>
-            <div class="ud-stat-val" id="ud-stat-bookings">0</div>
-            <div class="ud-stat-link">View all</div>
-          </div>
-          <div class="ud-stat-card" onclick="accOpenSub('wishlist')">
-            <div class="ud-stat-ico" style="background:var(--green-bg);color:var(--green)">&#9825;</div>
-            <div class="ud-stat-lbl">Wishlist</div>
-            <div class="ud-stat-val" id="ud-stat-wishlist">0</div>
-            <div class="ud-stat-link">View all</div>
-          </div>
-          <div class="ud-stat-card" onclick="accOpenSub('bookings')">
-            <div class="ud-stat-ico" style="background:rgba(217,119,6,.1);color:#d97706">&#128176;</div>
-            <div class="ud-stat-lbl">Total Spent</div>
-            <div class="ud-stat-val" id="ud-stat-spent">&#8358;0</div>
-            <div class="ud-stat-link">View details</div>
-          </div>
-          <div class="ud-stat-card" onclick="accOpenSub('inbox')">
-            <div class="ud-stat-ico" style="background:var(--teal-bg);color:var(--teal)">&#128172;</div>
-            <div class="ud-stat-lbl">Messages</div>
-            <div class="ud-stat-val" id="ud-stat-messages">0</div>
-            <div class="ud-stat-link">View all</div>
-          </div>
+        <div class="fst" style="margin:.9rem 0 .4rem;padding-bottom:.3rem;font-size:1.02rem">Account Settings</div>
+        <div class="ud-list">
+          <div class="ud-list-item" onclick="accOpenSub('profile')"><div class="ud-list-ico" style="background:var(--gold-dim);color:var(--gold)">&#128100;</div><div class="ud-list-mid"><div class="ud-list-title">Personal Information</div><div class="ud-list-sub">Update your personal details</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('payments')"><div class="ud-list-ico" style="background:var(--blue-bg);color:var(--blue)">&#128179;</div><div class="ud-list-mid"><div class="ud-list-title">Payments &amp; Wallet</div><div class="ud-list-sub">Manage your balance and transactions</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('bookings')"><div class="ud-list-ico" style="background:var(--purple-bg);color:var(--purple)">&#128197;</div><div class="ud-list-mid"><div class="ud-list-title">My Bookings</div><div class="ud-list-sub">View upcoming and past stays</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('notifications')"><div class="ud-list-ico" style="background:rgba(217,119,6,.1);color:#d97706">&#128276;</div><div class="ud-list-mid"><div class="ud-list-title">Notifications</div><div class="ud-list-sub">Choose what you want to be notified about</div></div><span class="ud-list-chev">&#8250;</span></div>
         </div>
 
-        <div class="fst" style="margin:0 0 .6rem">Upcoming Booking</div>
-        <div class="ud-upcoming" id="ud-upcoming"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
-
-        <div class="ud-two-col">
-          <div class="ud-card">
-            <div class="ud-card-head"><span>Recommended For You</span><a onclick="SP('hotels')">View All</a></div>
-            <div id="ud-recommend-mini"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
-            <button class="sagain" style="width:100%;margin-top:.8rem" onclick="SP('hotels')">Explore More Hotels &#8250;</button>
-          </div>
-          <div class="ud-card">
-            <div class="ud-card-head"><span>Wishlist</span><a onclick="accOpenSub('wishlist')">View All</a></div>
-            <div id="ud-wishlist-mini"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>
-          </div>
+        <div class="fst" style="margin:.9rem 0 .4rem;padding-bottom:.3rem;font-size:1.02rem">Support &amp; More</div>
+        <div class="ud-list">
+          <div class="ud-list-item" onclick="accOpenSub('chats')"><div class="ud-list-ico" style="background:var(--teal-bg);color:var(--teal)">&#128172;</div><div class="ud-list-mid"><div class="ud-list-title">Messages</div><div class="ud-list-sub">Your conversations with hotels</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('support')"><div class="ud-list-ico" style="background:var(--green-bg);color:var(--green)">&#128276;</div><div class="ud-list-mid"><div class="ud-list-title">Contact Admin</div><div class="ud-list-sub">We're here to help</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('refer')"><div class="ud-list-ico" style="background:var(--gold-dim);color:var(--gold)">&#127873;</div><div class="ud-list-mid"><div class="ud-list-title">Refer &amp; Earn</div><div class="ud-list-sub">Invite friends and earn rewards</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('help')"><div class="ud-list-ico" style="background:var(--blue-bg);color:var(--blue)">&#127911;</div><div class="ud-list-mid"><div class="ud-list-title">Help &amp; Support</div><div class="ud-list-sub">Get help with your bookings and account</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('terms')"><div class="ud-list-ico" style="background:var(--purple-bg);color:var(--purple)">&#128220;</div><div class="ud-list-mid"><div class="ud-list-title">Terms &amp; Conditions</div><div class="ud-list-sub">Read our terms and conditions</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('privacy')"><div class="ud-list-ico" style="background:rgba(217,38,38,.1);color:var(--red)">&#128274;</div><div class="ud-list-mid"><div class="ud-list-title">Privacy Policy</div><div class="ud-list-sub">Learn how we protect your data</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('about')"><div class="ud-list-ico" style="background:var(--surface2);color:var(--muted)">&#8505;</div><div class="ud-list-mid"><div class="ud-list-title">About Hotels Continental</div><div class="ud-list-sub">Learn more about us</div></div><span class="ud-list-chev">&#8250;</span></div>
         </div>
 
-        <div class="fst" style="margin:0 0 .6rem">Quick Access</div>
-        <div class="ud-qa-grid">
-          <div class="ud-qa-item" onclick="accOpenSub('bookings')"><div class="ud-qa-ico" style="background:var(--purple-bg);color:var(--purple)">&#128197;</div><div class="ud-qa-lbl">My Bookings</div></div>
-          <div class="ud-qa-item" onclick="SP('hotels')"><div class="ud-qa-ico" style="background:var(--gold-dim);color:var(--gold)">&#127974;</div><div class="ud-qa-lbl">Find Hotels</div></div>
-          <div class="ud-qa-item" onclick="accOpenSub('payments')"><div class="ud-qa-ico" style="background:var(--blue-bg);color:var(--blue)">&#128179;</div><div class="ud-qa-lbl">Wallet</div></div>
-          <div class="ud-qa-item" onclick="accOpenSub('chats')"><div class="ud-qa-ico" style="background:var(--teal-bg);color:var(--teal)">&#128172;</div><div class="ud-qa-lbl">Messages</div></div>
-        </div>
-
-        <div class="ud-refer-banner" onclick="accOpenSub('refer')">
-          <div class="ud-refer-ico">&#127873;</div>
-          <div class="ud-refer-txt"><strong>Refer &amp; Earn</strong><span>Refer friends and family and earn exciting rewards on every booking.</span></div>
-          <button class="ud-refer-btn">Refer Now &#8250;</button>
-        </div>
+        <button class="ud-logout-btn" onclick="accLogout()">&#128682; Log Out</button>
       </div>
 
       <!-- Account sub-pages -->
@@ -1954,7 +1960,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5);padding:1.6rem 1.5rem;te
           <p style="font-size:.72rem;color:var(--muted);margin:-.3rem 0 .9rem;line-height:1.5">This must be your hotel's official company account &mdash; the account name should match your registered hotel name (<strong id="hdw-hotelname-hint">your hotel</strong>) so the admin can verify it's really you before releasing funds.</p>
           <button class="fsub" onclick="hdRequestWithdrawal()">Request Withdrawal</button>
         </div>
-        <div class="fst" style="margin:1.2rem 0 .4rem" id="hd-wallet-tx-list">Recent Transactions</div>
+        <div class="fst" style="margin:1.2rem 0 .4rem;display:flex;align-items:center;justify-content:space-between" id="hd-wallet-tx-list"><span>Recent Transactions</span><span class="wal-tx-viewall" id="hd-wallet-tx-viewall" style="display:none" onclick="walToggleTxAll('hd-wallet')">View All</span></div>
         <div id="hd-wallet-tx"></div>
         <div class="wal-secure"><span style="font-size:1.3rem">&#128274;</span><div><b>Your wallet is secure</b>All transactions are encrypted and your funds are safe with us.</div></div>
       </div>
@@ -8979,7 +8985,8 @@ function confirmNewPassword() {
 function accRenderHeader() {
   var p = _accProfile || {};
   document.getElementById("acc-name").textContent = p.name || "Guest";
-  document.getElementById("acc-email").textContent = p.email || "";
+  var emailHidden = document.getElementById("acc-email"); if (emailHidden) emailHidden.textContent = p.email || "";
+  var emailVis = document.getElementById("acc-email-vis"); if (emailVis) emailVis.textContent = p.email || "";
   var roleEl = document.getElementById("acc-role"); if (roleEl) roleEl.textContent = "Member";
   var initial = (p.name || "U").trim().charAt(0).toUpperCase();
   var avHtml = p.photoURL ? '<img src="' + p.photoURL + '" style="width:100%;height:100%;object-fit:cover;border-radius:50%"/>' : initial;
@@ -8992,7 +8999,6 @@ function accRenderHeader() {
   var firstName = (p.name || "Account").trim().split(" ")[0];
   var navA = document.getElementById("ni-account"); if (navA) navA.textContent = firstName;
   var navAm = document.getElementById("ni-account-m"); if (navAm) navAm.textContent = firstName;
-  var welcome = document.getElementById("ud-welcome-name"); if (welcome) welcome.textContent = "Welcome back, " + firstName + "! \uD83D\uDC4B";
   var since = document.getElementById("acc-member-since");
   if (since) {
     if (p.createdAt && p.createdAt.toDate) {
@@ -9049,111 +9055,16 @@ function accShowMenu() {
 
 // Populates the "Welcome back" overview screen: stat cards, the upcoming
 // booking hero card, wishlist preview and recommended-hotels preview.
+// Populates the four stat numbers on the "My Profile" overview page
+// (Bookings, Wishlist, Spent, Messages).
 function accRenderDashboard() {
   accFetchAllBookings().then(function(docs) {
     var bkEl = document.getElementById("ud-stat-bookings"); if (bkEl) bkEl.textContent = docs.length;
     var spent = docs.reduce(function(s, b) { return s + (b._src === "hotel" ? (b.amount || 0) : (b.amountPaid || 0)); }, 0);
     var spEl = document.getElementById("ud-stat-spent"); if (spEl) spEl.textContent = "\u20a6" + Math.round(spent).toLocaleString();
-    accRenderUpcomingBooking(docs);
-  }).catch(function() {
-    var up = document.getElementById("ud-upcoming");
-    if (up) up.innerHTML = '<div class="emst"><span class="ei">&#9888;</span>Could not load bookings.</div>';
-  });
+  }).catch(function() {});
 
   var wlEl = document.getElementById("ud-stat-wishlist"); if (wlEl) wlEl.textContent = (_accWishlist || []).length;
-  var wlWrap = document.getElementById("ud-wishlist-mini");
-  if (wlWrap) {
-    if (!_accWishlist || !_accWishlist.length) { wlWrap.innerHTML = '<div class="emst"><span class="ei">&#9825;</span>No saved rooms yet.</div>'; }
-    else {
-      wlWrap.innerHTML = _accWishlist.slice(0, 2).map(function(w) {
-        var price = PRICES[w.roomType] || 0;
-        return '<div class="ud-mini-row"><div class="ud-mini-thumb">&#127974;</div>' +
-          '<div class="ud-mini-mid"><div class="ud-mini-name">' + esc(w.roomType) + '</div><div class="ud-mini-sub">Hotels Continental</div></div>' +
-          '<div class="ud-mini-price">\u20a6' + price.toLocaleString() + '<br/><span style="font-weight:400;color:var(--muted);font-size:.68rem">/ night</span></div>' +
-          '<span class="ud-mini-heart">&#9829;</span></div>';
-      }).join("");
-    }
-  }
-
-  var recWrap = document.getElementById("ud-recommend-mini");
-  if (recWrap) {
-    var showRecommended = function() {
-      var wishedNames = (_accWishlist || []).map(function(w) { return w.roomType; });
-      var list = (_mpHotels || []).filter(function(h) { return wishedNames.indexOf(h.name) === -1; }).slice(0, 2);
-      if (!list.length) list = (_mpHotels || []).slice(0, 2);
-      if (!list.length) { recWrap.innerHTML = '<div class="emst"><span class="ei">&#127974;</span>No hotels to show yet.</div>'; return; }
-      recWrap.innerHTML = list.map(function(h) {
-        var ratingRow = h.rating ? '<div class="ud-mini-sub">&#11088; ' + Number(h.rating).toFixed(1) + '</div>' : '';
-        return '<div class="ud-mini-row" style="cursor:pointer" onclick="openHotelDetail(\'' + h.id + '\')">' +
-          '<div class="ud-mini-thumb">' + (h.coverImage ? '<img src="' + h.coverImage + '"/>' : '&#127974;') + '</div>' +
-          '<div class="ud-mini-mid"><div class="ud-mini-name">' + esc(h.name) + '</div><div class="ud-mini-sub">' + esc(h.location || "") + '</div>' + ratingRow + '</div>' +
-          (h.minPrice ? '<div class="ud-mini-price">\u20a6' + h.minPrice.toLocaleString() + '<br/><span style="font-weight:400;color:var(--muted);font-size:.68rem">/ night</span></div>' : '') +
-          '</div>';
-      }).join("");
-    };
-    if (_mpHotels && _mpHotels.length) showRecommended();
-    else loadMarketplaceHotels().then(showRecommended).catch(function() { recWrap.innerHTML = '<div class="emst"><span class="ei">&#9888;</span>Could not load hotels.</div>'; });
-  }
-}
-
-// Picks the single most relevant booking to feature on the Overview page:
-// the soonest stay that hasn't checked out yet and hasn't been rejected or
-// cancelled. Falls back to "No Upcoming Bookings" when nothing qualifies.
-function accRenderUpcomingBooking(docs) {
-  var up = document.getElementById("ud-upcoming");
-  if (!up) return;
-  var today = new Date(); today.setHours(0, 0, 0, 0);
-  var candidates = docs.filter(function(b) {
-    var status = b.status || "Pending";
-    if (status === "Rejected" || status === "Cancelled" || status === "CheckedOut") return false;
-    if (!b.checkOut) return false;
-    var co = new Date(b.checkOut);
-    return !isNaN(co) && co >= today;
-  });
-  candidates.sort(function(a, b) {
-    var da = a.checkIn ? new Date(a.checkIn).getTime() : Infinity;
-    var db = b.checkIn ? new Date(b.checkIn).getTime() : Infinity;
-    return da - db;
-  });
-  var b = candidates[0];
-  if (!b) {
-    up.innerHTML = '<div class="ud-upcoming-empty"><span class="ei">&#128197;</span>' +
-      '<p>No Upcoming Bookings</p>' +
-      '<button class="fsub" style="width:auto;padding:.7rem 1.3rem" onclick="SP(\'hotels\')">Explore Hotels</button></div>';
-    return;
-  }
-  var isHotel = b._src === "hotel";
-  var name = isHotel ? (b.hotelName || "Hotel Booking") : "Hotels Continental";
-  var status = b.status || "Pending";
-  var statusCls = status === "Approved" ? "approved" : status === "Rejected" ? "rejected" : "pending";
-  var nights = 1;
-  if (b.checkIn && b.checkOut) nights = Math.max(1, Math.round((new Date(b.checkOut) - new Date(b.checkIn)) / 86400000));
-  var renderCard = function(hotel) {
-    var img = hotel && hotel.coverImage ? '<img src="' + hotel.coverImage + '"/>' : '&#127974;';
-    var loc = (hotel && hotel.location) || (isHotel ? "" : "Lagos, Nigeria");
-    up.innerHTML = '<div class="ud-upcoming-img">' + img +
-      '<div class="ud-upcoming-status ' + statusCls + '">' + esc(status) + '</div></div>' +
-      '<div class="ud-upcoming-body">' +
-      '<div class="ud-upcoming-name">' + esc(name) + '</div>' +
-      (loc ? '<div class="ud-upcoming-loc">&#128205; ' + esc(loc) + '</div>' : '') +
-      '<div class="ud-upcoming-dates">' +
-      '<div><div class="ud-upcoming-date-lbl">Check-in</div><div class="ud-upcoming-date-val">' + esc(b.checkIn || "-") + '</div></div>' +
-      '<div><div class="ud-upcoming-date-lbl">Check-out</div><div class="ud-upcoming-date-val">' + esc(b.checkOut || "-") + '</div></div>' +
-      '</div>' +
-      '<div class="ud-upcoming-nights">' + nights + ' Night' + (nights > 1 ? "s" : "") + '</div>' +
-      '<button class="ud-upcoming-btn" onclick="accOpenSub(\'bookings\')">View Booking</button>' +
-      '</div>';
-  };
-  if (isHotel && b.hotelId) {
-    var lookup = function() {
-      var hotel = (_mpHotels || []).filter(function(h) { return h.id === b.hotelId; })[0];
-      renderCard(hotel);
-    };
-    if (_mpHotels && _mpHotels.length) lookup();
-    else loadMarketplaceHotels().then(lookup).catch(function() { renderCard(null); });
-  } else {
-    renderCard(null);
-  }
 }
 
 function accLoadMenuBadges() {
@@ -9408,18 +9319,20 @@ function walEyeToggle(scope) {
   else { el.textContent = "\u2022\u2022\u2022\u2022\u2022\u2022"; el.dataset.hidden = "1"; if (eye) eye.innerHTML = "&#128584;"; }
 }
 function walHeroHTML(scope, opts) {
-  var totalStr = "\u20a6" + Math.round(opts.total).toLocaleString();
+  var availStr = "\u20a6" + Math.round(opts.available).toLocaleString();
+  var btns = "";
+  if (opts.addOnclick) btns += '<button class="wal-btn wal-btn-primary" onclick="' + opts.addOnclick + '">' + (opts.addLabel || "+ Top Up") + '</button>';
+  if (opts.secondaryOnclick) btns += '<button class="wal-btn wal-btn-secondary" onclick="' + opts.secondaryOnclick + '">' + (opts.secondaryLabel || "More") + '</button>';
   return '<div class="wal-hero">' +
-    '<div class="wal-hero-top"><div class="wal-hero-lbl">Total Balance <button class="wal-eye" id="' + scope + '-eye" onclick="walEyeToggle(\'' + scope + '\')">&#128065;</button></div>' +
-    (opts.addOnclick ? '<button class="wal-add-btn" onclick="' + opts.addOnclick + '">' + (opts.addLabel || "+ Add Money") + '</button>' : '') +
-    '</div>' +
-    '<div class="wal-bal" id="' + scope + '-bal-val" data-real="' + totalStr + '" data-hidden="0">' + totalStr + '</div>' +
-    '<div class="wal-split"><div>Available Balance<b>\u20a6' + Math.round(opts.available).toLocaleString() + '</b></div><div>Pending Balance<b>\u20a6' + Math.round(opts.pending).toLocaleString() + '</b></div></div>' +
+    '<div class="wal-hero-top"><div class="wal-hero-lbl">Available Balance <button class="wal-eye" id="' + scope + '-eye" onclick="walEyeToggle(\'' + scope + '\')">&#128065;</button></div></div>' +
+    '<div class="wal-bal" id="' + scope + '-bal-val" data-real="' + availStr + '" data-hidden="0">' + availStr + '</div>' +
+    '<div class="wal-hero-sub">Total \u20a6' + Math.round(opts.total).toLocaleString() + ' &nbsp;&middot;&nbsp; Pending \u20a6' + Math.round(opts.pending).toLocaleString() + '</div>' +
+    (btns ? '<div class="wal-hero-btns">' + btns + '</div>' : '') +
     '</div>';
 }
 function walQaRowHTML(items) {
   return '<div class="wal-qa-row">' + items.map(function(it) {
-    return '<div class="wal-qa-btn" onclick="' + it.onclick + '"><div class="wal-qa-ico" style="background:' + it.bg + ';color:' + it.color + '">' + it.icon + '</div><div class="wal-qa-lbl">' + it.label + '</div></div>';
+    return '<div class="wal-qa-btn" onclick="' + it.onclick + '"><div class="wal-qa-ico" style="background:' + it.bg + ';color:' + it.color + '">' + it.icon + '</div><div class="wal-qa-lbl">' + it.label + '</div>' + (it.sub ? '<div class="wal-qa-sub">' + it.sub + '</div>' : '') + '</div>';
   }).join("") + '</div>';
 }
 function walOverviewHTML(items) {
@@ -9433,6 +9346,14 @@ function walTxRowHTML(it) {
   return '<div class="wal-tx-row"><div class="wal-tx-ico" style="background:' + it.bg + ';color:' + it.color + '">' + it.icon + '</div>' +
     '<div style="flex:1;min-width:0"><div class="wal-tx-title">' + esc(it.title) + '</div><div class="wal-tx-sub">' + esc(it.sub) + '</div></div>' +
     '<div class="wal-tx-amt" style="color:' + amtColor + '">' + sign + '\u20a6' + Math.round(it.amount).toLocaleString() + '</div></div>';
+}
+function walToggleTxAll(scope) {
+  var rest = document.getElementById(scope + "-tx-rest");
+  var link = document.getElementById(scope + "-tx-viewall");
+  if (!rest) return;
+  var showing = rest.style.display !== "none";
+  rest.style.display = showing ? "none" : "block";
+  if (link) link.textContent = showing ? "View All" : "Show Less";
 }
 function accRenderPayments(body) {
   var uid = _accUser ? _accUser.uid : "";
@@ -9484,17 +9405,19 @@ function accRenderPayments(body) {
       if (t.positive) moneyInMonth += t.amount; else moneyOutMonth += t.amount;
     });
 
-    var html = walHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "+ Add Money", addOnclick: "accToggleFundWallet()" });
+    var html = walHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "Top Up Wallet", addOnclick: "accToggleFundWallet()", secondaryLabel: "Bank Transfer", secondaryOnclick: "accToggleFundWallet();accSelectFundMethod('manual')" });
 
     html += walQaRowHTML([
-      { icon: "&#128179;", color: "var(--gold)", bg: "var(--gold-dim)", label: "Add Money", onclick: "accToggleFundWallet()" },
-      { icon: "&#128176;", color: "var(--green)", bg: "var(--green-bg)", label: "Withdraw", onclick: "accToggleWithdraw()" },
-      { icon: "&#127974;", color: "var(--blue)", bg: "var(--blue-bg)", label: "Bank Transfer", onclick: "accToggleFundWallet();accSelectFundMethod('manual')" },
-      { icon: "&#128337;", color: "var(--muted)", bg: "var(--surface2)", label: "Transaction History", onclick: "document.getElementById('acc-wal-tx-list').scrollIntoView({behavior:'smooth'})" }
+      { icon: "&#128179;", color: "var(--gold)", bg: "var(--gold-dim)", label: "Add Money", sub: "Instant top up", onclick: "accToggleFundWallet()" },
+      { icon: "&#128176;", color: "var(--green)", bg: "var(--green-bg)", label: "Withdraw", sub: "To bank account", onclick: "accToggleWithdraw()" },
+      { icon: "&#127974;", color: "var(--blue)", bg: "var(--blue-bg)", label: "Bank Transfer", sub: "Send to your bank", onclick: "accToggleFundWallet();accSelectFundMethod('manual')" },
+      { icon: "&#128337;", color: "var(--muted)", bg: "var(--surface2)", label: "Transaction History", sub: "View all activity", onclick: "document.getElementById('acc-wal-tx-list').scrollIntoView({behavior:'smooth'})" }
     ]);
 
     html += '<div id="fw-panel" style="display:none">' + fwPanelHTML() + '</div>';
     html += '<div id="wd-panel" style="display:none">' + wdPanelHTML() + '</div>';
+
+    html += '<div class="wal-promo" onclick="SP(\'hotels\')"><span style="font-size:1.2rem">&#127968;</span><div><b>Enjoy faster bookings!</b><span>Use your wallet balance for quick and secure hotel bookings.</span></div><span class="chev">&#8250;</span></div>';
 
     html += '<div class="fst" style="margin:.7rem 0 .35rem;padding-bottom:.3rem;font-size:1rem">Wallet Overview</div>';
     html += walOverviewHTML([
@@ -9504,9 +9427,9 @@ function accRenderPayments(body) {
       { icon: "&#128202;", color: "var(--blue)", bg: "var(--blue-bg)", value: tx.length, label: "Total Transactions" }
     ]);
 
-    html += '<div class="fst" style="margin:.7rem 0 .25rem;padding-bottom:.3rem;font-size:1rem" id="acc-wal-tx-list">Recent Transactions</div>';
+    html += '<div class="fst" style="margin:.7rem 0 .25rem;padding-bottom:.3rem;font-size:1rem;display:flex;align-items:center;justify-content:space-between" id="acc-wal-tx-list"><span>Recent Transactions</span>' + (tx.length > 4 ? '<span class="wal-tx-viewall" onclick="walToggleTxAll(\'acc-wal\')" id="acc-wal-tx-viewall">View All</span>' : '') + '</div>';
     html += tx.length
-      ? '<div class="lcard" style="padding:.3rem 1.1rem">' + tx.slice(0, 20).map(walTxRowHTML).join("") + '</div>'
+      ? '<div class="lcard" style="padding:.3rem 1.1rem"><div id="acc-wal-tx-visible">' + tx.slice(0, 4).map(walTxRowHTML).join("") + '</div><div id="acc-wal-tx-rest" style="display:none">' + tx.slice(4, 20).map(walTxRowHTML).join("") + '</div></div>'
       : '<div class="emst"><span class="ei">&#128179;</span>No transactions yet.</div>';
 
     html += '<div class="wal-secure"><span style="font-size:1.3rem">&#128274;</span><div><b>Your wallet is secure</b>All transactions are encrypted and your funds are safe with us.</div></div>';
@@ -11100,13 +11023,13 @@ function hdRenderWallet() {
   var pendingAmt = pendingW.reduce(function(s, w) { return s + (Number(w.amount) || 0); }, 0);
   var bal = h.walletBalance || 0;
 
-  document.getElementById("hd-wallet-hero").innerHTML = walHeroHTML("hd-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addOnclick: null });
+  document.getElementById("hd-wallet-hero").innerHTML = walHeroHTML("hd-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addOnclick: null, secondaryLabel: "Request Withdrawal", secondaryOnclick: "document.getElementById('hd-withdraw-form').scrollIntoView({behavior:'smooth'});document.getElementById('hdw-amount').focus()" });
 
   document.getElementById("hd-wallet-qa").innerHTML = walQaRowHTML([
-    { icon: "&#128176;", color: "var(--gold)", bg: "var(--gold-dim)", label: "Request Withdrawal", onclick: "document.getElementById('hd-withdraw-form').scrollIntoView({behavior:'smooth'});document.getElementById('hdw-amount').focus()" },
-    { icon: "&#127974;", color: "var(--blue)", bg: "var(--blue-bg)", label: "Bank Details", onclick: "document.getElementById('hdw-bank').scrollIntoView({behavior:'smooth'});document.getElementById('hdw-bank').focus()" },
-    { icon: "&#128197;", color: "var(--green)", bg: "var(--green-bg)", label: "View Bookings", onclick: "hdSetTab('bookings')" },
-    { icon: "&#128337;", color: "var(--muted)", bg: "var(--surface2)", label: "Transaction History", onclick: "document.getElementById('hd-wallet-tx-list').scrollIntoView({behavior:'smooth'})" }
+    { icon: "&#128176;", color: "var(--gold)", bg: "var(--gold-dim)", label: "Request Withdrawal", sub: "To bank account", onclick: "document.getElementById('hd-withdraw-form').scrollIntoView({behavior:'smooth'});document.getElementById('hdw-amount').focus()" },
+    { icon: "&#127974;", color: "var(--blue)", bg: "var(--blue-bg)", label: "Bank Details", sub: "Manage payout account", onclick: "document.getElementById('hdw-bank').scrollIntoView({behavior:'smooth'});document.getElementById('hdw-bank').focus()" },
+    { icon: "&#128197;", color: "var(--green)", bg: "var(--green-bg)", label: "View Bookings", sub: "See all reservations", onclick: "hdSetTab('bookings')" },
+    { icon: "&#128337;", color: "var(--muted)", bg: "var(--surface2)", label: "Transaction History", sub: "View all activity", onclick: "document.getElementById('hd-wallet-tx-list').scrollIntoView({behavior:'smooth'})" }
   ]);
 
   var now = new Date();
@@ -11145,8 +11068,10 @@ function hdRenderWallet() {
   });
   tx.sort(function(a, b) { return (b.t ? b.t.toMillis() : 0) - (a.t ? a.t.toMillis() : 0); });
 
+  var tvEl = document.getElementById("hd-wallet-tx-viewall");
+  if (tvEl) tvEl.style.display = tx.length > 4 ? "inline" : "none";
   document.getElementById("hd-wallet-tx").innerHTML = tx.length
-    ? '<div class="lcard" style="padding:.3rem 1.1rem">' + tx.slice(0, 20).map(walTxRowHTML).join("") + '</div>'
+    ? '<div class="lcard" style="padding:.3rem 1.1rem"><div id="hd-wallet-tx-visible">' + tx.slice(0, 4).map(walTxRowHTML).join("") + '</div><div id="hd-wallet-tx-rest" style="display:none">' + tx.slice(4, 20).map(walTxRowHTML).join("") + '</div></div>'
     : '<div class="emst"><span class="ei">&#128179;</span>No transactions yet.</div>';
 }
 function hdRequestWithdrawal() {
