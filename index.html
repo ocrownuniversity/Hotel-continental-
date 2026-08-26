@@ -94,18 +94,17 @@ body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);min
   .hz-quick-item .dd{font-size:.5rem}
 }
 .hz-banner{width:100%;margin:1rem auto 0;max-width:640px;box-sizing:border-box}
-.hz-banner-in{background:var(--ink);border-radius:12px;padding:.8rem 1rem;position:relative;overflow:hidden;box-sizing:border-box}
+.hz-banner-in{background:var(--ink);border-radius:12px;padding:.75rem .9rem;position:relative;overflow:hidden;box-sizing:border-box}
 .hz-banner-tag{display:inline-block;background:var(--ha-gold);color:var(--ink);font-size:.58rem;font-weight:700;letter-spacing:.08em;padding:.2rem .5rem;border-radius:5px;margin-bottom:.3rem}
 .hz-banner-h{font-family:'Playfair Display',serif;color:#fff;font-size:1.02rem;font-weight:700}
 .hz-banner-p{color:rgba(255,255,255,.65);font-size:.72rem;margin-top:.15rem}
-.hz-banner-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem .8rem;margin-top:.55rem;flex-wrap:wrap}
-.hz-banner-price{color:var(--ha-gold);font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:700;text-align:right;flex-shrink:0;white-space:nowrap}
-.hz-banner-price small{display:block;font-family:'Jost',sans-serif;font-size:.56rem;color:rgba(255,255,255,.55);font-weight:400;letter-spacing:.04em}
-.hz-banner-btn{background:#fff;color:var(--ink);border:none;border-radius:8px;padding:.5rem 1.05rem;font-weight:700;font-size:.72rem;cursor:pointer;flex-shrink:0}
-@media(max-width:400px){
-  .hz-banner-row{flex-direction:column;align-items:stretch;gap:.6rem}
-  .hz-banner-price{text-align:left}
-  .hz-banner-btn{width:100%;text-align:center}
+.hz-banner-row{display:flex;align-items:center;justify-content:space-between;gap:.5rem .6rem;margin-top:.5rem;flex-wrap:nowrap}
+.hz-banner-price{color:var(--ha-gold);font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;text-align:right;flex-shrink:0;white-space:nowrap}
+.hz-banner-price small{display:block;font-family:'Jost',sans-serif;font-size:.54rem;color:rgba(255,255,255,.55);font-weight:400;letter-spacing:.04em}
+.hz-banner-btn{background:#fff;color:var(--ink);border:none;border-radius:8px;padding:.5rem .95rem;font-weight:700;font-size:.68rem;cursor:pointer;flex-shrink:0;white-space:nowrap}
+@media(max-width:340px){
+  .hz-banner-btn{padding:.45rem .7rem;font-size:.62rem}
+  .hz-banner-price{font-size:.88rem}
 }
 @media(max-width:860px){
   .hz-fields{grid-template-columns:repeat(6,1fr);grid-template-areas:"a a a a a a" "b b b c c c" "d d e e f f" "g g g g g g";}
@@ -1108,7 +1107,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
     </div>
   </div>
 
-  <div class="sec" style="padding-top:0">
+  <div class="sec" style="padding-top:0;padding-bottom:1.8rem">
     <div class="hz-banner">
       <div class="hz-banner-in">
         <span class="hz-banner-tag">TOP PICKS</span>
@@ -2405,6 +2404,12 @@ main{padding:80px 1rem 78px;max-width:1200px;margin:0 auto}
 .list-row{display:flex;align-items:center;gap:.7rem;padding:.75rem 0;border-bottom:1px solid var(--border);flex-wrap:wrap}
 .list-row:last-child{border-bottom:none}
 .list-row&gt;div:first-child{flex-shrink:0}
+.ur-row{padding:.75rem 0;border-bottom:1px solid var(--border)}
+.ur-row:last-child{border-bottom:none}
+.ur-top{display:flex;align-items:center;gap:.7rem}
+.ur-name-wrap{flex:1;min-width:0}
+.ur-bottom{display:flex;align-items:center;gap:.5rem;margin-top:.55rem;padding-left:46px;flex-wrap:wrap}
+.ur-bottom .kebab{margin-left:auto}
 .list-row .lr-main{flex:1 1 160px;min-width:0}
 .list-row .lr-meta{display:flex;align-items:center;gap:.6rem;flex-shrink:0;margin-left:auto}
 @media(max-width:640px){
@@ -5409,7 +5414,7 @@ function renderUsersList() {
         &#x27;&lt;option value=&quot;admin&quot;&#x27;+(roleKey===&quot;admin&quot;?&quot; selected&quot;:&quot;&quot;)+&#x27;&gt;Admin&lt;/option&gt;&#x27; +
       &#x27;&lt;/select&gt;&#x27;;
     var kebabAction = u._src===&quot;hotels&quot; ? &quot;cycleHotelStatus(&#x27;&quot;+u._srcId+&quot;&#x27;)&quot; : u._src===&quot;subadmins&quot; ? &quot;cycleSubAdminStatus(&#x27;&quot;+u._srcId+&quot;&#x27;)&quot; : &quot;cycleUserStatus(&#x27;&quot;+u.id+&quot;&#x27;)&quot;;
-    html += &#x27;&lt;div class=&quot;list-row&quot;&gt;&lt;div class=&quot;avatar-sm&quot;&gt;&#x27;+initial+&#x27;&lt;/div&gt;&lt;div style=&quot;flex:1&quot;&gt;&lt;div class=&quot;lr-name&quot;&gt;&#x27;+esc(u.name)+&#x27;&lt;/div&gt;&lt;div class=&quot;lr-sub&quot;&gt;&#x27;+esc(u.email)+&#x27; &amp;middot; &#x27;+fmtDate(u.createdAt)+&#x27;&lt;/div&gt;&lt;/div&gt;&#x27;+roleField+&#x27;&amp;nbsp;&#x27;+pill(u.status||&quot;active&quot;)+&#x27;&lt;button class=&quot;kebab&quot; onclick=&quot;&#x27;+kebabAction+&#x27;&quot;&gt;&amp;#8942;&lt;/button&gt;&lt;/div&gt;&#x27;;
+    html += &#x27;&lt;div class=&quot;ur-row&quot;&gt;&lt;div class=&quot;ur-top&quot;&gt;&lt;div class=&quot;avatar-sm&quot;&gt;&#x27;+initial+&#x27;&lt;/div&gt;&lt;div class=&quot;ur-name-wrap&quot;&gt;&lt;div class=&quot;lr-name&quot;&gt;&#x27;+(esc(u.name)||&quot;No name&quot;)+&#x27;&lt;/div&gt;&lt;div class=&quot;lr-sub&quot;&gt;&#x27;+(esc(u.email)||&quot;No email&quot;)+&#x27; &amp;middot; &#x27;+fmtDate(u.createdAt)+&#x27;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;ur-bottom&quot;&gt;&#x27;+roleField+&#x27;&#x27;+pill(u.status||&quot;active&quot;)+&#x27;&lt;button class=&quot;kebab&quot; onclick=&quot;&#x27;+kebabAction+&#x27;&quot;&gt;&amp;#8942;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&#x27;;
   });
   document.getElementById(&quot;users-list&quot;).innerHTML = slice.length ? html : &#x27;&lt;div class=&quot;empty&quot;&gt;No users found.&lt;/div&gt;&#x27;;
   var pager = &quot;&quot;;
