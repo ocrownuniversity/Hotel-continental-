@@ -585,15 +585,17 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
    colored direction icons. Built as generic classes so both pages reuse the
    same markup/JS helpers instead of duplicating styles. ── */
 .wal-hero{background:linear-gradient(135deg,var(--ink) 0%,#173a6b 100%);border-radius:16px;padding:.9rem 1rem;color:#fff;margin-bottom:.7rem;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
-.wal-hero-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem}
+.wal-hero-deco{position:absolute;top:.6rem;right:.7rem;font-size:2.1rem;opacity:.9;transform:rotate(8deg);filter:drop-shadow(0 4px 8px rgba(0,0,0,.25))}
+.wal-hero-top{display:flex;align-items:center;justify-content:space-between;gap:.6rem;max-width:70%}
 .wal-hero-lbl{font-size:.62rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:.35rem}
 .wal-eye{cursor:pointer;opacity:.75;font-size:.78rem;background:none;border:none;color:#fff}
-.wal-bal{font-family:'Playfair Display',serif;font-size:1.65rem;margin:.2rem 0 .3rem;letter-spacing:.01em}
+.wal-bal{font-family:'Playfair Display',serif;font-size:1.65rem;margin:.2rem 0 0;letter-spacing:.01em}
+.wal-hero-cap{font-size:.64rem;color:rgba(255,255,255,.45);margin-bottom:.3rem}
 .wal-hero-sub{font-size:.66rem;color:rgba(255,255,255,.6)}
 .wal-hero-btns{display:flex;gap:.5rem;margin-top:.75rem}
-.wal-btn{flex:1;border-radius:9px;padding:.55rem;font-weight:700;font-size:.72rem;cursor:pointer;white-space:nowrap;border:none}
+.wal-btn{border-radius:9px;padding:.6rem 1.1rem;font-weight:700;font-size:.74rem;cursor:pointer;white-space:nowrap;border:none}
 .wal-btn-primary{background:var(--gold);color:#fff}
-.wal-btn-secondary{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3)}
+.wal-btn-secondary{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);flex:1}
 .wal-qa-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem;margin-bottom:.7rem}
 .wal-qa-btn{background:var(--surface);border:1px solid var(--border);border-radius:11px;padding:.55rem .3rem;display:flex;flex-direction:column;align-items:center;gap:.3rem;cursor:pointer;box-shadow:var(--shadow);transition:transform .15s}
 .wal-qa-btn:active{transform:scale(.95)}
@@ -2001,7 +2003,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
           <p style="font-size:.72rem;color:var(--muted);margin:-.3rem 0 .9rem;line-height:1.5">This must be your hotel's official company account &mdash; the account name should match your registered hotel name (<strong id="hdw-hotelname-hint">your hotel</strong>) so the admin can verify it's really you before releasing funds.</p>
           <button class="fsub" onclick="hdRequestWithdrawal()">Request Withdrawal</button>
         </div>
-        <div class="fst" style="margin:1.2rem 0 .4rem;display:flex;align-items:center;justify-content:space-between" id="hd-wallet-tx-list"><span>Recent Transactions</span><span class="wal-tx-viewall" id="hd-wallet-tx-viewall" style="display:none" onclick="walToggleTxAll('hd-wallet')">View All</span></div>
+        <div class="fst" style="margin:1.2rem 0 .4rem;display:flex;align-items:center;justify-content:space-between" id="hd-wallet-tx-list"><span>Recent Transactions</span><span class="wal-tx-viewall" id="hd-wallet-tx-viewall" style="display:none" onclick="walToggleTxAll('hd-wallet')">View All &#8594;</span></div>
         <div id="hd-wallet-tx"></div>
         <div class="wal-secure"><span style="font-size:1.3rem">&#128274;</span><div><b>Your wallet is secure</b>All transactions are encrypted and your funds are safe with us.</div></div>
       </div>
@@ -5121,6 +5123,14 @@ function maybeGrantReferralReward(email) {
         }),
         db.collection(&quot;users&quot;).doc(refDoc.id).update({
           walletBalance: firebase.firestore.FieldValue.increment(REFERRAL_REFERRER_BONUS)
+        }),
+        db.collection(&quot;walletFundings&quot;).add({
+          uid: udoc.id, amount: REFERRAL_NEW_USER_BONUS, status: &quot;paid&quot;, method: &quot;referral&quot;,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }),
+        db.collection(&quot;walletFundings&quot;).add({
+          uid: refDoc.id, amount: REFERRAL_REFERRER_BONUS, status: &quot;paid&quot;, method: &quot;referral&quot;,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
       ]);
     });
@@ -8636,6 +8646,14 @@ function maybeGrantReferralReward(email) {
         }),
         db.collection("users").doc(refDoc.id).update({
           walletBalance: firebase.firestore.FieldValue.increment(REFERRAL_REFERRER_BONUS)
+        }),
+        db.collection("walletFundings").add({
+          uid: udoc.id, amount: REFERRAL_NEW_USER_BONUS, status: "paid", method: "referral",
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        }),
+        db.collection("walletFundings").add({
+          uid: refDoc.id, amount: REFERRAL_REFERRER_BONUS, status: "paid", method: "referral",
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
         })
       ]);
     });
@@ -9442,12 +9460,14 @@ function walEyeToggle(scope) {
 function walHeroHTML(scope, opts) {
   var availStr = "\u20a6" + Math.round(opts.available).toLocaleString();
   var btns = "";
-  if (opts.addOnclick) btns += '<button class="wal-btn wal-btn-primary" onclick="' + opts.addOnclick + '">' + (opts.addLabel || "+ Top Up") + '</button>';
+  if (opts.addOnclick) btns += '<button class="wal-btn wal-btn-primary" onclick="' + opts.addOnclick + '">&#10133; ' + (opts.addLabel || "Top Up") + '</button>';
   if (opts.secondaryOnclick) btns += '<button class="wal-btn wal-btn-secondary" onclick="' + opts.secondaryOnclick + '">' + (opts.secondaryLabel || "More") + '</button>';
   return '<div class="wal-hero">' +
+    '<div class="wal-hero-deco">&#128181;</div>' +
     '<div class="wal-hero-top"><div class="wal-hero-lbl">Available Balance <button class="wal-eye" id="' + scope + '-eye" onclick="walEyeToggle(\'' + scope + '\')">&#128065;</button></div></div>' +
     '<div class="wal-bal" id="' + scope + '-bal-val" data-real="' + availStr + '" data-hidden="0">' + availStr + '</div>' +
-    '<div class="wal-hero-sub">Total \u20a6' + Math.round(opts.total).toLocaleString() + ' &nbsp;&middot;&nbsp; Pending \u20a6' + Math.round(opts.pending).toLocaleString() + '</div>' +
+    '<div class="wal-hero-cap">Total Balance</div>' +
+    '<div class="wal-hero-sub">Available \u20a6' + Math.round(opts.available).toLocaleString() + ' &nbsp;&bull;&nbsp; Pending \u20a6' + Math.round(opts.pending).toLocaleString() + '</div>' +
     (btns ? '<div class="wal-hero-btns">' + btns + '</div>' : '') +
     '</div>';
 }
@@ -9474,7 +9494,7 @@ function walToggleTxAll(scope) {
   if (!rest) return;
   var showing = rest.style.display !== "none";
   rest.style.display = showing ? "none" : "block";
-  if (link) link.textContent = showing ? "View All" : "Show Less";
+  if (link) link.textContent = showing ? "View All \u2192" : "Show Less";
 }
 function accRenderPayments(body) {
   var uid = _accUser ? _accUser.uid : "";
@@ -9504,14 +9524,18 @@ function accRenderPayments(body) {
     // "transactions" collection in this app.
     var tx = [];
     fundings.forEach(function(f) {
-      if (f.status === "paid") tx.push({ t: f.createdAt, positive: true, amount: f.amount || 0, icon: "&#8595;", color: "var(--green)", bg: "var(--green-bg)", title: "Money Added", sub: (f.method === "manual" ? "Bank Transfer" : "Paystack") + (f.createdAt ? " \u00b7 " + new Date(f.createdAt.toMillis()).toLocaleDateString() : "") });
-      else if (f.status === "pending") tx.push({ t: f.createdAt, positive: true, amount: f.amount || 0, icon: "&#8987;", color: "#b5820a", bg: "rgba(181,130,10,.1)", title: "Money Added (Pending)", sub: "Awaiting admin approval" });
+      if (f.method === "referral") {
+        if (f.status === "paid") tx.push({ t: f.createdAt, positive: true, amount: f.amount || 0, icon: "&#127873;", color: "var(--purple)", bg: "var(--purple-bg)", title: "Referral Bonus", sub: "Reward credited" + (f.createdAt ? " \u00b7 " + new Date(f.createdAt.toMillis()).toLocaleDateString() : "") });
+        return;
+      }
+      if (f.status === "paid") tx.push({ t: f.createdAt, positive: true, amount: f.amount || 0, icon: "&#128092;", color: "var(--green)", bg: "var(--green-bg)", title: "Wallet Funding", sub: (f.method === "manual" ? "Bank Transfer" : "Paystack") + (f.createdAt ? " \u00b7 " + new Date(f.createdAt.toMillis()).toLocaleDateString() : "") });
+      else if (f.status === "pending") tx.push({ t: f.createdAt, positive: true, amount: f.amount || 0, icon: "&#8987;", color: "#b5820a", bg: "rgba(181,130,10,.1)", title: "Wallet Funding (Pending)", sub: "Awaiting admin approval" });
     });
     walletBookings.forEach(function(b) {
-      tx.push({ t: b.createdAt, positive: false, amount: b.amount || 0, icon: "&#8593;", color: "var(--red)", bg: "var(--red-bg)", title: "Hotel Booking Payment", sub: esc(b.hotelName || "") + " \u00b7 " + esc(b.roomType || "") });
+      tx.push({ t: b.createdAt, positive: false, amount: b.amount || 0, icon: "&#127970;", color: "var(--blue)", bg: "var(--blue-bg)", title: "Hotel Booking Payment", sub: esc(b.hotelName || "") + " \u00b7 " + esc(b.roomType || "") });
     });
     withdrawals.forEach(function(w) {
-      if (w.status === "Approved") tx.push({ t: w.requestedAt, positive: false, amount: w.amount || 0, icon: "&#127974;", color: "var(--blue)", bg: "var(--blue-bg)", title: "Bank Transfer", sub: "To " + esc(w.bankName || "-") });
+      if (w.status === "Approved") tx.push({ t: w.requestedAt, positive: false, amount: w.amount || 0, icon: "&#127974;", color: "#b5820a", bg: "rgba(181,130,10,.1)", title: "Bank Transfer", sub: "To " + esc(w.bankName || "-") });
       else if (w.status === "Rejected") tx.push({ t: w.requestedAt, positive: true, amount: w.amount || 0, icon: "&#8635;", color: "var(--gold)", bg: "var(--gold-dim)", title: "Withdrawal Refunded", sub: "Request was declined \u00b7 refunded to wallet" });
       else tx.push({ t: w.requestedAt, positive: false, amount: w.amount || 0, icon: "&#8987;", color: "#b5820a", bg: "rgba(181,130,10,.1)", title: "Withdrawal (Pending)", sub: "To " + esc(w.bankName || "-") + " \u00b7 awaiting approval" });
     });
@@ -9526,13 +9550,13 @@ function accRenderPayments(body) {
       if (t.positive) moneyInMonth += t.amount; else moneyOutMonth += t.amount;
     });
 
-    var html = walHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "Top Up Wallet", addOnclick: "accToggleFundWallet()", secondaryLabel: "Bank Transfer", secondaryOnclick: "accToggleFundWallet();accSelectFundMethod('manual')" });
+    var html = walHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "Top Up Wallet", addOnclick: "accToggleFundWallet()" });
 
     html += walQaRowHTML([
       { icon: "&#128179;", color: "var(--gold)", bg: "var(--gold-dim)", label: "Add Money", sub: "Instant top up", onclick: "accToggleFundWallet()" },
       { icon: "&#128176;", color: "var(--green)", bg: "var(--green-bg)", label: "Withdraw", sub: "To bank account", onclick: "accToggleWithdraw()" },
       { icon: "&#127974;", color: "var(--blue)", bg: "var(--blue-bg)", label: "Bank Transfer", sub: "Send to your bank", onclick: "accToggleFundWallet();accSelectFundMethod('manual')" },
-      { icon: "&#128337;", color: "var(--muted)", bg: "var(--surface2)", label: "Transaction History", sub: "View all activity", onclick: "document.getElementById('acc-wal-tx-list').scrollIntoView({behavior:'smooth'})" }
+      { icon: "&#128337;", color: "var(--purple)", bg: "var(--purple-bg)", label: "Transaction History", sub: "View all activity", onclick: "document.getElementById('acc-wal-tx-list').scrollIntoView({behavior:'smooth'})" }
     ]);
 
     html += '<div id="fw-panel" style="display:none">' + fwPanelHTML() + '</div>';
@@ -9548,7 +9572,7 @@ function accRenderPayments(body) {
       { icon: "&#128202;", color: "var(--blue)", bg: "var(--blue-bg)", value: tx.length, label: "Total Transactions" }
     ]);
 
-    html += '<div class="fst" style="margin:.7rem 0 .25rem;padding-bottom:.3rem;font-size:1rem;display:flex;align-items:center;justify-content:space-between" id="acc-wal-tx-list"><span>Recent Transactions</span>' + (tx.length > 4 ? '<span class="wal-tx-viewall" onclick="walToggleTxAll(\'acc-wal\')" id="acc-wal-tx-viewall">View All</span>' : '') + '</div>';
+    html += '<div class="fst" style="margin:.7rem 0 .25rem;padding-bottom:.3rem;font-size:1rem;display:flex;align-items:center;justify-content:space-between" id="acc-wal-tx-list"><span>Recent Transactions</span>' + (tx.length > 4 ? '<span class="wal-tx-viewall" onclick="walToggleTxAll(\'acc-wal\')" id="acc-wal-tx-viewall">View All &#8594;</span>' : '') + '</div>';
     html += tx.length
       ? '<div class="lcard" style="padding:.3rem 1.1rem"><div id="acc-wal-tx-visible">' + tx.slice(0, 4).map(walTxRowHTML).join("") + '</div><div id="acc-wal-tx-rest" style="display:none">' + tx.slice(4, 20).map(walTxRowHTML).join("") + '</div></div>'
       : '<div class="emst"><span class="ei">&#128179;</span>No transactions yet.</div>';
