@@ -9896,6 +9896,29 @@ function accOpenChatThread(hotelId, hotelName) {
   }, function() {});
 }
 
+// Auto-reply: when a user messages a hotel or the admin team, a friendly
+// "we're busy, back soon" message auto-arrives from the other side, throttled
+// so it doesn't repeat while a real reply is likely still pending.
+var AUTO_REPLY_COOLDOWN_MS = 10 * 60 * 1000;
+function triggerAutoReply(collectionName, docId, replySender, text) {
+  var ref = db.collection(collectionName).doc(docId);
+  ref.get().then(function(doc) {
+    var data = (doc && doc.data()) || {};
+    var lastAuto = data.autoReplyAt ? data.autoReplyAt.toDate().getTime() : 0;
+    if (Date.now() - lastAuto < AUTO_REPLY_COOLDOWN_MS) return;
+    setTimeout(function() {
+      ref.collection("messages").add({
+        sender: replySender, text: text, createdAt: firebase.firestore.FieldValue.serverTimestamp(), auto: true
+      }).then(function() {
+        return ref.set({
+          lastMessage: text, lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: replySender,
+          autoReplyAt: firebase.firestore.FieldValue.serverTimestamp()
+        }, { merge: true });
+      }).catch(function(err) { console.error("Auto-reply failed:", err); });
+    }, 1200);
+  }).catch(function(err) { console.error("Auto-reply check failed:", err); });
+}
+
 function accSendChatMessage() {
   var input = document.getElementById("acc-chat-input");
   var text = input.value.trim();
@@ -9908,6 +9931,8 @@ function accSendChatMessage() {
     return db.collection("hotelChats").doc(tid).set({
       lastMessage: text, lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "user", unreadHotel: true
     }, { merge: true });
+  }).then(function() {
+    triggerAutoReply("hotelChats", tid, "hotel", "Thanks for your message! Our team is a little busy right now — we'll get back to you within the next 10 minutes.");
   }).catch(function() { T("Error", "Could not send your message. Please try again."); });
 }
 function accSendChatImage(file) {
@@ -10063,6 +10088,8 @@ function accSendSupportMessage() {
     return db.collection("supportChats").doc(uid).set({
       lastMessage: text, lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "user", unreadAdmin: true
     }, { merge: true });
+  }).then(function() {
+    triggerAutoReply("supportChats", uid, "admin", "Thanks for reaching out! Our admin team is currently busy and will get back to you within the next 10 minutes.");
   }).catch(function() { T("Error", "Could not send your message. Please try again."); });
 }
 
