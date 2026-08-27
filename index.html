@@ -253,18 +253,21 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 }
 .ud-welcome h2{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--ink);overflow-wrap:anywhere;max-width:100%}
 .ud-welcome p{color:var(--muted);font-size:.82rem;margin-top:.2rem}
-.ud-banner{background:linear-gradient(135deg,var(--ink),#132b52);border-radius:16px;padding:1.1rem 1.2rem;color:#fff;margin:.8rem 0;display:flex;flex-wrap:wrap;gap:.8rem;align-items:flex-start;justify-content:space-between}
+.ud-banner{background:linear-gradient(135deg,var(--ink),#132b52);border-radius:16px;padding:1.1rem 1.2rem;color:#fff;margin:.8rem 0;display:flex;flex-wrap:wrap;gap:.9rem;align-items:center;justify-content:space-between}
 .ud-banner-left{display:flex;align-items:center;gap:.85rem;min-width:0;flex:1}
+.ud-avatar-wrap{position:relative;flex-shrink:0}
+.ud-avatar-edit{position:absolute;right:-2px;bottom:-2px;width:20px;height:20px;border-radius:50%;background:var(--gold);border:2px solid var(--ink);display:flex;align-items:center;justify-content:center;font-size:.6rem;cursor:pointer;color:#fff}
 .ud-banner-name{font-family:'Playfair Display',serif;font-size:1.08rem;overflow-wrap:anywhere;max-width:100%}
 .ud-banner-email{font-size:.74rem;color:rgba(255,255,255,.65);margin-top:.15rem;overflow-wrap:anywhere}
-.ud-banner-badge{font-size:.62rem;color:var(--gold2);background:rgba(255,255,255,.12);display:inline-block;padding:.16rem .55rem;border-radius:100px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
-.ud-banner-since{font-size:.68rem;color:rgba(255,255,255,.55);margin-top:.25rem}
-.ud-banner-right{min-width:200px}
-.ud-wallet-lbl{font-size:.66rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.35rem}
-.ud-wallet-row{display:flex;align-items:center;gap:.55rem}
-.ud-wallet-val{font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--gold2)}
-.ud-wallet-eye{background:none;border:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:1rem;padding:0}
-.ud-topup-btn{margin-top:.7rem;background:var(--gold);color:#fff;border:none;border-radius:9px;padding:.6rem 1rem;font-weight:700;font-size:.78rem;cursor:pointer;white-space:nowrap}
+.ud-banner-badge{font-size:.62rem;color:var(--gold2);background:rgba(255,255,255,.12);display:inline-block;padding:.16rem .55rem;border-radius:100px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap;margin-top:.3rem}
+.ud-banner-since{font-size:.66rem;color:rgba(255,255,255,.55);margin-top:.3rem}
+.ud-banner-div{width:1px;align-self:stretch;background:rgba(255,255,255,.15);flex-shrink:0}
+.ud-banner-right{min-width:130px;flex-shrink:0}
+.ud-wallet-lbl{font-size:.62rem;color:rgba(255,255,255,.6);text-transform:uppercase;letter-spacing:.07em;margin-bottom:.3rem;white-space:nowrap}
+.ud-wallet-row{display:flex;align-items:center;gap:.5rem}
+.ud-wallet-val{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--gold2);white-space:nowrap}
+.ud-wallet-eye{background:none;border:none;color:rgba(255,255,255,.55);cursor:pointer;font-size:.9rem;padding:0}
+.ud-topup-btn{margin-top:.55rem;background:var(--gold);color:#fff;border:none;border-radius:9px;padding:.5rem .75rem;font-weight:700;font-size:.68rem;cursor:pointer;white-space:nowrap}
 .ud-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.9rem;margin-bottom:1.2rem}
 @media (max-width:720px){.ud-stats{grid-template-columns:repeat(2,1fr)}}
 .ud-stat-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:1rem;box-shadow:var(--shadow);cursor:pointer}
@@ -273,23 +276,40 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .ud-stat-val{font-size:1.4rem;font-weight:800;color:var(--text);margin-top:.15rem}
 .ud-stat-link{font-size:.72rem;color:var(--gold);font-weight:600;margin-top:.4rem}
 
+/* Profile completion nudge card */
+.ud-pc-card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);padding:.8rem .9rem;margin:.8rem 0;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.ud-pc-ico{width:38px;height:38px;border-radius:10px;background:var(--gold-dim);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.ud-pc-mid{flex:1;min-width:160px}
+.ud-pc-title{font-size:.8rem;font-weight:700;color:var(--text)}
+.ud-pc-bar-row{display:flex;align-items:center;gap:.5rem;margin-top:.35rem}
+.ud-pc-bar-track{flex:1;height:6px;border-radius:4px;background:var(--surface2);overflow:hidden}
+.ud-pc-bar-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:4px}
+.ud-pc-pct{font-size:.68rem;color:var(--muted);font-weight:700;flex-shrink:0}
+.ud-pc-hint{font-size:.66rem;color:var(--muted);margin-top:.3rem}
+.ud-pc-btn{background:var(--surface2);color:var(--gold);border:none;border-radius:9px;padding:.5rem .8rem;font-weight:700;font-size:.68rem;cursor:pointer;white-space:nowrap;flex-shrink:0}
+
 /* Compact single-row stat strip + settings lists (Overview / My Profile page) */
 .ud-stat-row{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);display:grid;grid-template-columns:repeat(4,1fr)}
 .ud-stat-col{padding:.75rem .3rem;text-align:center;cursor:pointer;border-right:1px solid var(--border)}
 .ud-stat-col:last-child{border-right:none}
-.ud-stat-col-ico{font-size:1rem;margin-bottom:.3rem}
+.ud-stat-col-ico{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.72rem;margin:0 auto .3rem}
 .ud-stat-col-val{font-size:.95rem;font-weight:800;color:var(--text)}
 .ud-stat-col-lbl{font-size:.62rem;color:var(--muted);margin-top:.1rem}
 .ud-list{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
 .ud-list-item{display:flex;align-items:center;gap:.7rem;padding:.7rem .9rem;border-bottom:1px solid var(--border);cursor:pointer}
 .ud-list-item:last-child{border-bottom:none}
 .ud-list-item:active{background:var(--surface2)}
-.ud-list-ico{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.ud-list-ico{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0;color:#fff}
 .ud-list-mid{flex:1;min-width:0}
 .ud-list-title{font-size:.82rem;font-weight:600;color:var(--text)}
 .ud-list-sub{font-size:.68rem;color:var(--muted);margin-top:.1rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ud-list-chev{color:var(--muted2);font-size:1rem;flex-shrink:0}
 .ud-logout-btn{width:100%;margin:1rem 0 .5rem;background:#fff;border:1px solid var(--red-bd,rgba(217,38,38,.35));color:var(--red);border-radius:12px;padding:.8rem;font-weight:700;font-size:.85rem;cursor:pointer}
+.ud-sup-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.ud-sup-item{background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:var(--shadow);padding:.75rem .6rem;display:flex;align-items:center;gap:.55rem;cursor:pointer}
+.ud-sup-item:active{background:var(--surface2)}
+.ud-sup-ico{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;flex-shrink:0;color:#fff}
+.ud-sup-lbl{font-size:.74rem;font-weight:600;color:var(--text);line-height:1.15}
 .ud-card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.2rem;box-shadow:var(--shadow);margin-bottom:1.2rem}
 .ud-card-head{display:flex;align-items:center;justify-content:space-between;font-weight:700;font-size:.98rem;color:var(--ink);margin-bottom:.9rem}
 .ud-card-head a{color:var(--gold);font-size:.78rem;font-weight:600;cursor:pointer}
@@ -599,28 +619,6 @@ nav{position:fixed;top:0;left:0;right:0;z-index:500;background:rgba(250,247,242,
 .wal-promo span{color:var(--muted)}
 .wal-promo .chev{margin-left:auto;color:var(--muted2);flex-shrink:0}
 .wal-tx-viewall{font-size:.68rem;font-weight:600;color:var(--gold);cursor:pointer}
-/* Customer "Payments & Wallet" hero card + transaction rows (distinct from
-   the shared .wal-* classes above so the hotel partner Wallet tab is untouched) */
-.cw-hero{background:linear-gradient(135deg,var(--ink) 0%,#173a6b 100%);border-radius:16px;padding:1.3rem 1.3rem 1.4rem;color:#fff;margin-bottom:.9rem;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
-.cw-hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.6rem}
-.cw-hero-lbl{font-size:.68rem;color:rgba(255,255,255,.65);text-transform:uppercase;letter-spacing:.1em;display:flex;align-items:center;gap:.4rem}
-.cw-eye{cursor:pointer;opacity:.75;font-size:.85rem;background:none;border:none;color:#fff;padding:0}
-.cw-hero-illus{font-size:2.4rem;line-height:1;opacity:.9;flex-shrink:0}
-.cw-bal{font-family:'Playfair Display',serif;font-size:2.1rem;margin:.55rem 0 .1rem;letter-spacing:.01em}
-.cw-bal-cap{font-size:.72rem;color:rgba(255,255,255,.55);margin-bottom:.6rem}
-.cw-hero-sub{font-size:.74rem;color:rgba(255,255,255,.7);padding-top:.6rem;border-top:1px solid rgba(255,255,255,.14)}
-.cw-hero-btn{width:100%;margin-top:.9rem;background:var(--gold);color:#fff;border:none;border-radius:10px;padding:.75rem;font-weight:700;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:.5rem}
-.cw-hero-btn:active{transform:scale(.98)}
-.cw-tx-row{display:flex;align-items:center;gap:.65rem;padding:.65rem 0;border-bottom:1px solid var(--border)}
-.cw-tx-row:last-child{border-bottom:none}
-.cw-tx-ico{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.95rem;flex-shrink:0}
-.cw-tx-title{font-weight:600;font-size:.82rem;color:var(--text)}
-.cw-tx-sub{font-size:.68rem;color:var(--muted);margin-top:.15rem}
-.cw-tx-right{text-align:right;flex-shrink:0}
-.cw-tx-amt{font-weight:700;font-size:.82rem;white-space:nowrap}
-.cw-tx-pill{display:inline-block;margin-top:.3rem;font-size:.6rem;font-weight:700;padding:.15rem .5rem;border-radius:100px;white-space:nowrap}
-.cw-tx-pill.ok{background:var(--green-bg);color:var(--green)}
-.cw-tx-pill.pending{background:rgba(181,130,10,.12);color:#b5820a}
 .bkc{background:var(--surface);border:1px solid var(--border);border-radius:13px;padding:1.1rem;margin-bottom:.75rem;box-shadow:var(--shadow);animation:fu .4s ease}
 .bkh{display:flex;align-items:flex-start;justify-content:space-between;gap:.55rem;flex-wrap:wrap}
 .bkn{font-family:'Playfair Display',serif;font-size:1.15rem}
@@ -850,6 +848,7 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
   <button class="doc-lightbox-close" onclick="closeDocLightbox()">&times;</button>
   <div class="doc-lightbox-body" id="doc-lightbox-body"></div>
 </div>
+
 
 <nav>
   <button class="nbrand" onclick="SP('home')">
@@ -1469,54 +1468,53 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
 
         <div class="ud-banner">
           <div class="ud-banner-left">
-            <div id="acc-avatar" style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;overflow:hidden;flex-shrink:0">U</div>
+            <div class="ud-avatar-wrap">
+              <div id="acc-avatar" style="width:60px;height:60px;border-radius:50%;background:rgba(255,255,255,.15);border:2px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.4rem;color:#fff;overflow:hidden;flex-shrink:0">U</div>
+              <div class="ud-avatar-edit" onclick="accOpenSub('profile')" title="Edit photo">&#128247;</div>
+            </div>
             <div style="min-width:0;flex:1">
               <div class="ud-banner-name" id="acc-name">Guest</div>
               <div class="ud-banner-email" id="acc-email-vis"></div>
-              <span class="ud-banner-badge" id="acc-role" style="margin-top:.4rem;display:inline-block">Member</span>
-              <div class="ud-banner-since" id="acc-member-since" style="margin-top:.4rem"></div>
+              <span class="ud-banner-badge" id="acc-role" style="display:inline-block">Member</span>
+              <div class="ud-banner-since" id="acc-member-since"></div>
             </div>
           </div>
-          <div class="ud-banner-right" style="text-align:right">
-            <div class="ud-wallet-lbl" style="display:flex;align-items:center;justify-content:flex-end;gap:.35rem">Wallet Balance<button class="ud-wallet-eye" id="acc-wallet-eye" onclick="accToggleWalletVisibility()">&#128065;</button></div>
-            <div class="ud-wallet-row" style="justify-content:flex-end"><span class="ud-wallet-val" id="acc-wallet-val">&#8358;0</span></div>
-            <button class="ud-topup-btn" onclick="accGoTopUp()">&#128179; Top Up Wallet</button>
+          <div class="ud-banner-div"></div>
+          <div class="ud-banner-right">
+            <div class="ud-wallet-lbl">Wallet Balance <button type="button" class="ud-wallet-eye" onclick="accToggleWalletVisibility()" id="acc-wallet-eye" style="vertical-align:middle">&#128065;</button></div>
+            <div class="ud-wallet-row"><div class="ud-wallet-val" id="acc-wallet-val">&#8358;0.00</div></div>
+            <button type="button" class="ud-topup-btn" onclick="accOpenSub('payments')">&#128179; Top Up Wallet</button>
           </div>
         </div>
 
-        <div class="lcard" id="acc-pc-card" style="padding:1.1rem 1.2rem;margin:0 0 .8rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap">
-          <div style="flex:1;min-width:220px">
-            <div style="display:flex;align-items:center;gap:.6rem;margin-bottom:.55rem">
-              <div style="width:34px;height:34px;border-radius:9px;background:var(--gold-dim);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0">&#128737;</div>
-              <div style="font-weight:700;font-size:.92rem;color:var(--ink)">Profile Completion</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:.65rem">
-              <div style="flex:1;height:7px;background:var(--surface2);border-radius:100px;overflow:hidden"><div id="acc-pc-bar" style="height:100%;width:0%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:100px;transition:width .4s"></div></div>
-              <div style="font-size:.78rem;font-weight:700;color:var(--text);white-space:nowrap" id="acc-pc-pct">0%</div>
-            </div>
-            <div style="font-size:.74rem;color:var(--muted);margin-top:.5rem" id="acc-pc-msg"></div>
+        <div class="ud-pc-card" id="ud-pc-card">
+          <div class="ud-pc-ico">&#128274;</div>
+          <div class="ud-pc-mid">
+            <div class="ud-pc-title">Profile Completion</div>
+            <div class="ud-pc-bar-row"><div class="ud-pc-bar-track"><div class="ud-pc-bar-fill" id="ud-pc-bar" style="width:0%"></div></div><span class="ud-pc-pct" id="ud-pc-pct">0%</span></div>
+            <div class="ud-pc-hint" id="ud-pc-hint"></div>
           </div>
-          <button class="ab absv" id="acc-pc-btn" onclick="accOpenSub('profile')" style="white-space:nowrap;padding:.6rem 1.05rem">Complete Profile &#8594;</button>
+          <button type="button" class="ud-pc-btn" id="ud-pc-btn" onclick="accOpenSub('profile')">Complete Profile &#8594;</button>
         </div>
 
         <div class="ud-stat-row">
           <div class="ud-stat-col" onclick="accOpenSub('bookings')">
-            <div class="ud-stat-col-ico" style="color:var(--purple)">&#128197;</div>
+            <div class="ud-stat-col-ico" style="background:var(--blue-bg);color:var(--blue)">&#128197;</div>
             <div class="ud-stat-col-val" id="ud-stat-bookings">0</div>
             <div class="ud-stat-col-lbl">Bookings</div>
           </div>
           <div class="ud-stat-col" onclick="accOpenSub('wishlist')">
-            <div class="ud-stat-col-ico" style="color:var(--green)">&#9825;</div>
+            <div class="ud-stat-col-ico" style="background:var(--green-bg);color:var(--green)">&#9825;</div>
             <div class="ud-stat-col-val" id="ud-stat-wishlist">0</div>
             <div class="ud-stat-col-lbl">Wishlist</div>
           </div>
           <div class="ud-stat-col" onclick="accOpenSub('bookings')">
-            <div class="ud-stat-col-ico" style="color:#d97706">&#128176;</div>
+            <div class="ud-stat-col-ico" style="background:rgba(217,119,6,.1);color:#d97706">&#128176;</div>
             <div class="ud-stat-col-val" id="ud-stat-spent">&#8358;0</div>
             <div class="ud-stat-col-lbl">Spent</div>
           </div>
           <div class="ud-stat-col" onclick="accOpenSub('inbox')">
-            <div class="ud-stat-col-ico" style="color:var(--teal)">&#128172;</div>
+            <div class="ud-stat-col-ico" style="background:var(--purple-bg);color:var(--purple)">&#128172;</div>
             <div class="ud-stat-col-val" id="ud-stat-messages">0</div>
             <div class="ud-stat-col-lbl">Messages</div>
           </div>
@@ -1524,21 +1522,21 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
 
         <div class="fst" style="margin:.9rem 0 .4rem;padding-bottom:.3rem;font-size:1.02rem">Account Settings</div>
         <div class="ud-list">
-          <div class="ud-list-item" onclick="accOpenSub('profile')"><div class="ud-list-ico" style="background:var(--gold-dim);color:var(--gold)">&#128100;</div><div class="ud-list-mid"><div class="ud-list-title">Personal Information</div><div class="ud-list-sub">Update your personal details</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('payments')"><div class="ud-list-ico" style="background:var(--blue-bg);color:var(--blue)">&#128179;</div><div class="ud-list-mid"><div class="ud-list-title">Payments &amp; Wallet</div><div class="ud-list-sub">Manage your balance and transactions</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('bookings')"><div class="ud-list-ico" style="background:var(--purple-bg);color:var(--purple)">&#128197;</div><div class="ud-list-mid"><div class="ud-list-title">My Bookings</div><div class="ud-list-sub">View upcoming and past stays</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('notifications')"><div class="ud-list-ico" style="background:rgba(217,119,6,.1);color:#d97706">&#128276;</div><div class="ud-list-mid"><div class="ud-list-title">Notifications</div><div class="ud-list-sub">Choose what you want to be notified about</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('profile')"><div class="ud-list-ico" style="background:var(--ink)">&#128100;</div><div class="ud-list-mid"><div class="ud-list-title">Personal Information</div><div class="ud-list-sub">Update your personal details</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('payments')"><div class="ud-list-ico" style="background:var(--gold)">&#128179;</div><div class="ud-list-mid"><div class="ud-list-title">Payments &amp; Wallet</div><div class="ud-list-sub">Manage your balance and transactions</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('bookings')"><div class="ud-list-ico" style="background:var(--red)">&#128197;</div><div class="ud-list-mid"><div class="ud-list-title">My Bookings</div><div class="ud-list-sub">View upcoming and past stays</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('notifications')"><div class="ud-list-ico" style="background:#d97706">&#128276;</div><div class="ud-list-mid"><div class="ud-list-title">Notifications</div><div class="ud-list-sub">Choose what you want to be notified about</div></div><span class="ud-list-chev">&#8250;</span></div>
+          <div class="ud-list-item" onclick="accOpenSub('chats')"><div class="ud-list-ico" style="background:var(--teal)">&#128172;</div><div class="ud-list-mid"><div class="ud-list-title">Messages</div><div class="ud-list-sub">Your conversations with hotels</div></div><span class="ud-list-chev">&#8250;</span></div>
         </div>
 
         <div class="fst" style="margin:.9rem 0 .4rem;padding-bottom:.3rem;font-size:1.02rem">Support &amp; More</div>
-        <div class="ud-list">
-          <div class="ud-list-item" onclick="accOpenSub('chats')"><div class="ud-list-ico" style="background:var(--teal-bg);color:var(--teal)">&#128172;</div><div class="ud-list-mid"><div class="ud-list-title">Messages</div><div class="ud-list-sub">Your conversations with hotels</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('support')"><div class="ud-list-ico" style="background:var(--green-bg);color:var(--green)">&#128276;</div><div class="ud-list-mid"><div class="ud-list-title">Contact Admin</div><div class="ud-list-sub">We're here to help</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('refer')"><div class="ud-list-ico" style="background:var(--gold-dim);color:var(--gold)">&#127873;</div><div class="ud-list-mid"><div class="ud-list-title">Refer &amp; Earn</div><div class="ud-list-sub">Invite friends and earn rewards</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('help')"><div class="ud-list-ico" style="background:var(--blue-bg);color:var(--blue)">&#127911;</div><div class="ud-list-mid"><div class="ud-list-title">Help &amp; Support</div><div class="ud-list-sub">Get help with your bookings and account</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('terms')"><div class="ud-list-ico" style="background:var(--purple-bg);color:var(--purple)">&#128220;</div><div class="ud-list-mid"><div class="ud-list-title">Terms &amp; Conditions</div><div class="ud-list-sub">Read our terms and conditions</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('privacy')"><div class="ud-list-ico" style="background:rgba(217,38,38,.1);color:var(--red)">&#128274;</div><div class="ud-list-mid"><div class="ud-list-title">Privacy Policy</div><div class="ud-list-sub">Learn how we protect your data</div></div><span class="ud-list-chev">&#8250;</span></div>
-          <div class="ud-list-item" onclick="accOpenSub('about')"><div class="ud-list-ico" style="background:var(--surface2);color:var(--muted)">&#8505;</div><div class="ud-list-mid"><div class="ud-list-title">About Hotels Continental</div><div class="ud-list-sub">Learn more about us</div></div><span class="ud-list-chev">&#8250;</span></div>
+        <div class="ud-sup-grid">
+          <div class="ud-sup-item" onclick="accOpenSub('refer')"><div class="ud-sup-ico" style="background:var(--blue)">&#127873;</div><div class="ud-sup-lbl">Refer &amp; Earn</div></div>
+          <div class="ud-sup-item" onclick="accOpenSub('help')"><div class="ud-sup-ico" style="background:var(--green)">&#127911;</div><div class="ud-sup-lbl">Help &amp; Support</div></div>
+          <div class="ud-sup-item" onclick="accOpenSub('support')"><div class="ud-sup-ico" style="background:#d97706">&#128100;</div><div class="ud-sup-lbl">Contact Admin</div></div>
+          <div class="ud-sup-item" onclick="accOpenSub('about')"><div class="ud-sup-ico" style="background:var(--purple)">&#8505;</div><div class="ud-sup-lbl">About Us</div></div>
+          <div class="ud-sup-item" onclick="accOpenSub('terms')"><div class="ud-sup-ico" style="background:var(--red)">&#128220;</div><div class="ud-sup-lbl">Terms &amp; Conditions</div></div>
+          <div class="ud-sup-item" onclick="accOpenSub('privacy')"><div class="ud-sup-ico" style="background:var(--green)">&#128274;</div><div class="ud-sup-lbl">Privacy Policy</div></div>
         </div>
 
         <button class="ud-logout-btn" onclick="accLogout()">&#128682; Log Out</button>
@@ -1973,8 +1971,20 @@ footer{background:var(--ink);color:rgba(250,247,242,.5)}
           <button class="btn btn-o btn-sm" style="margin-bottom:.8rem" onclick="hdBackToThreadList()">&#8592; Back to Messages</button>
           <div class="card-title" id="hd-msg-thread-title"></div>
           <div class="chat-box"><div class="chat-msgs" id="hd-chat-msgs"></div>
-            <div class="chat-input-row"><input type="text" id="hd-chat-input" placeholder="Type a reply..." onkeypress="if(event.key==='Enter')hdSendChatMessage()"/>
-            <button class="chat-send-btn" onclick="hdSendChatMessage()">&#10148;</button></div></div>
+            <div class="chat-input-row" id="hd-chat-input-row">
+            <input type="file" accept="image/*" id="hd-chat-img-input" style="display:none" onchange="hdSendChatImage(this.files[0])"/>
+            <button class="chat-icon-btn" onclick="document.getElementById('hd-chat-img-input').click()" title="Attach image">&#128206;</button>
+            <input type="text" id="hd-chat-input" placeholder="Type a reply..." onkeypress="if(event.key==='Enter')hdSendChatMessage()"/>
+            <button class="chat-icon-btn" id="hd-chat-mic-btn" onclick="hdToggleChatRecording()" title="Record voice note"></button>
+            <button class="chat-send-btn" onclick="hdSendChatMessage()">&#10148;</button></div>
+            <div class="chat-rec-bar" id="hd-chat-recbar">
+              <span class="chat-rec-dot"></span><span class="chat-rec-timer" id="hd-chat-rec-timer" style="display:inline-block">0:00</span>
+              <div class="chat-rec-wave" id="hd-chat-wave"></div>
+              <span class="chat-rec-cancel-lbl">&#8592; Slide to cancel</span>
+              <button class="chat-rec-trash" onclick="hdCancelChatRecording()" title="Discard">&#128465;&#65039;</button>
+              <button class="chat-icon-btn rec" onclick="hdToggleChatRecording()" title="Stop and send"></button>
+            </div>
+          </div>
         </div>
       </div>
       <div id="hd-tab-wallet" class="hd-tab" style="display:none">
@@ -5382,12 +5392,19 @@ var ROLE_PILL = { customer:&quot;pill-green&quot;, hotelPartner:&quot;pill-blue&
 // updates that same source record.
 function getAllPeople() {
   var fromHotels = (_allHotels||[]).map(function(h){
-    return { id:&quot;hotel:&quot;+h.id, _src:&quot;hotels&quot;, _srcId:h.id, name:h.ownerName||h.name||&quot;(Hotel Owner)&quot;, email:h.ownerEmail||&quot;&quot;, role:&quot;hotelPartner&quot;, status:(h.status||&quot;Active&quot;), createdAt:h.createdAt };
+    return { id:&quot;hotel:&quot;+h.id, _src:&quot;hotels&quot;, _srcId:h.id, name:h.ownerName||h.name||&quot;(Hotel Owner)&quot;, email:h.ownerEmail||&quot;&quot;, role:&quot;hotelPartner&quot;, status:(h.status||&quot;Active&quot;), createdAt:h.createdAt, photoURL:h.coverImage||null };
   });
   var fromSubAdmins = (_allSubAdmins||[]).map(function(sa){
     return { id:&quot;subadmin:&quot;+sa.id, _src:&quot;subadmins&quot;, _srcId:sa.id, name:sa.name||sa.username||&quot;(Sub Admin)&quot;, email:sa.username||&quot;&quot;, role:&quot;admin&quot;, status:saStatus(sa), createdAt:sa.createdAt };
   });
   return _allUsers.concat(fromHotels, fromSubAdmins);
+}
+// Shows the person&#x27;s actual profile photo when one exists, falling back to
+// the initial-letter circle otherwise (customers without a photo, or any
+// record where the photo failed to load).
+function avatarHtml(photoURL, initial) {
+  if (!photoURL) return &#x27;&lt;div class=&quot;avatar-sm&quot;&gt;&#x27; + esc(initial) + &#x27;&lt;/div&gt;&#x27;;
+  return &#x27;&lt;div class=&quot;avatar-sm&quot; style=&quot;padding:0;overflow:hidden&quot;&gt;&lt;img src=&quot;&#x27; + esc(photoURL) + &#x27;&quot; style=&quot;width:100%;height:100%;object-fit:cover;border-radius:50%&quot; onerror=&quot;this.style.display=\&#x27;none\&#x27;;this.parentElement.textContent=\&#x27;&#x27; + esc(initial).replace(/&#x27;/g, &quot;&quot;) + &#x27;\&#x27;&quot;/&gt;&lt;/div&gt;&#x27;;
 }
 function renderUsersStats() {
   var people = getAllPeople();
@@ -5449,7 +5466,7 @@ function renderUsersList() {
         &#x27;&lt;option value=&quot;admin&quot;&#x27;+(roleKey===&quot;admin&quot;?&quot; selected&quot;:&quot;&quot;)+&#x27;&gt;Admin&lt;/option&gt;&#x27; +
       &#x27;&lt;/select&gt;&#x27;;
     var kebabAction = u._src===&quot;hotels&quot; ? &quot;cycleHotelStatus(&#x27;&quot;+u._srcId+&quot;&#x27;)&quot; : u._src===&quot;subadmins&quot; ? &quot;cycleSubAdminStatus(&#x27;&quot;+u._srcId+&quot;&#x27;)&quot; : &quot;cycleUserStatus(&#x27;&quot;+u.id+&quot;&#x27;)&quot;;
-    html += &#x27;&lt;div class=&quot;ur-row&quot;&gt;&lt;div class=&quot;ur-top&quot;&gt;&lt;div class=&quot;avatar-sm&quot;&gt;&#x27;+initial+&#x27;&lt;/div&gt;&lt;div class=&quot;ur-name-wrap&quot;&gt;&lt;div class=&quot;lr-name&quot;&gt;&#x27;+(esc(u.name)||&quot;No name&quot;)+&#x27;&lt;/div&gt;&lt;div class=&quot;lr-sub&quot;&gt;&#x27;+(esc(u.email)||&quot;No email&quot;)+&#x27; &amp;middot; &#x27;+fmtDate(u.createdAt)+&#x27;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;ur-bottom&quot;&gt;&#x27;+roleField+&#x27;&#x27;+pill(u.status||&quot;active&quot;)+&#x27;&lt;button class=&quot;kebab&quot; onclick=&quot;&#x27;+kebabAction+&#x27;&quot;&gt;&amp;#8942;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&#x27;;
+    html += &#x27;&lt;div class=&quot;ur-row&quot;&gt;&lt;div class=&quot;ur-top&quot;&gt;&#x27;+avatarHtml(u.photoURL, initial)+&#x27;&lt;div class=&quot;ur-name-wrap&quot;&gt;&lt;div class=&quot;lr-name&quot;&gt;&#x27;+(esc(u.name)||&quot;No name&quot;)+&#x27;&lt;/div&gt;&lt;div class=&quot;lr-sub&quot;&gt;&#x27;+(esc(u.email)||&quot;No email&quot;)+&#x27; &amp;middot; &#x27;+fmtDate(u.createdAt)+&#x27;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class=&quot;ur-bottom&quot;&gt;&#x27;+roleField+&#x27;&#x27;+pill(u.status||&quot;active&quot;)+&#x27;&lt;button class=&quot;kebab&quot; onclick=&quot;&#x27;+kebabAction+&#x27;&quot;&gt;&amp;#8942;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&#x27;;
   });
   document.getElementById(&quot;users-list&quot;).innerHTML = slice.length ? html : &#x27;&lt;div class=&quot;empty&quot;&gt;No users found.&lt;/div&gt;&#x27;;
   var pager = &quot;&quot;;
@@ -9082,38 +9099,37 @@ function accRenderHeader() {
   }
   accShowMenu();
   accRenderWalletSummary();
-  accUpdateProfileCompletion(p);
+  accRenderProfileCompletion(p);
 }
 
-// Drives the "Profile Completion" card on the My Profile page: base 60%
-// for having an account (name + email are always set at signup), plus 20%
-// for a profile photo and 20% for a saved phone number.
-function accUpdateProfileCompletion(p) {
-  var bar = document.getElementById("acc-pc-bar");
-  if (!bar) return;
-  var pct = 60;
-  var missing = [];
-  if (p.photoURL) pct += 20; else missing.push("a profile photo");
-  if (p.phone) pct += 20; else missing.push("your phone number");
-  document.getElementById("acc-pc-pct").textContent = pct + "%";
-  bar.style.width = pct + "%";
-  var msgEl = document.getElementById("acc-pc-msg");
-  var btnEl = document.getElementById("acc-pc-btn");
-  if (missing.length) {
-    msgEl.textContent = "Add " + missing.join(" and ") + " to complete your profile.";
-    if (btnEl) btnEl.style.display = "";
-  } else {
-    msgEl.textContent = "Your profile is all set. Nice work!";
+// Computes a simple profile-completion score from the optional fields a
+// customer can fill in (phone number, profile photo) beyond the required
+// name/email captured at signup, and shows a hint for whatever is missing.
+function accRenderProfileCompletion(p) {
+  var card = document.getElementById("ud-pc-card");
+  if (!card) return;
+  var checks = [
+    { done: !!(p.name), label: "your name" },
+    { done: !!(p.phone), label: "your phone number" },
+    { done: !!(p.photoURL), label: "a profile photo" }
+  ];
+  var done = checks.filter(function(c) { return c.done; }).length;
+  var pct = Math.round((done / checks.length) * 100);
+  var bar = document.getElementById("ud-pc-bar"); if (bar) bar.style.width = pct + "%";
+  var pctEl = document.getElementById("ud-pc-pct"); if (pctEl) pctEl.textContent = pct + "%";
+  var hintEl = document.getElementById("ud-pc-hint");
+  var btnEl = document.getElementById("ud-pc-btn");
+  var missing = checks.filter(function(c) { return !c.done; }).map(function(c) { return c.label; });
+  if (!missing.length) {
+    if (hintEl) hintEl.textContent = "Your profile is complete!";
     if (btnEl) btnEl.style.display = "none";
+    card.style.display = "flex";
+  } else {
+    var text = missing.length === 1 ? missing[0] : missing.slice(0, -1).join(", ") + " and " + missing[missing.length - 1];
+    if (hintEl) hintEl.textContent = "Add " + text + ".";
+    if (btnEl) btnEl.style.display = "";
+    card.style.display = "flex";
   }
-}
-
-// "Top Up Wallet" on the My Profile banner jumps to Payments & Wallet and
-// opens the fund panel once that page has finished loading.
-var _accAutoOpenFund = false;
-function accGoTopUp() {
-  _accAutoOpenFund = true;
-  accOpenSub("payments");
 }
 
 // Opens/closes the account sidebar drawer (same pattern as the hotel dashboard)
@@ -9176,12 +9192,12 @@ function accLoadMenuBadges() {
   var uid = _accUser ? _accUser.uid : "";
   if (!uid) return;
   db.collection("messages").where("uid", "==", uid).get().then(function(snap) {
-    var msgEl = document.getElementById("ud-stat-messages"); if (msgEl) msgEl.textContent = snap.docs.length;
-    var el = document.getElementById("acc-sb-inbox-badge");
-    if (!el) return;
     // Only count messages not yet marked read=true; a message is treated as
     // unread unless its "read" field is explicitly true.
     var unread = snap.docs.filter(function(d) { return d.data().read !== true; }).length;
+    var msgEl = document.getElementById("ud-stat-messages"); if (msgEl) msgEl.textContent = unread;
+    var el = document.getElementById("acc-sb-inbox-badge");
+    if (!el) return;
     if (unread) { el.textContent = unread; el.style.display = "inline-flex"; } else { el.style.display = "none"; }
   }).catch(function() {});
   db.collection("notifications").where("uid", "==", uid).get().then(function(snap) {
@@ -9510,7 +9526,7 @@ function accRenderPayments(body) {
       if (t.positive) moneyInMonth += t.amount; else moneyOutMonth += t.amount;
     });
 
-    var html = cwHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "Top Up Wallet", addOnclick: "accToggleFundWallet()" });
+    var html = walHeroHTML("acc-wal", { total: bal + pendingAmt, available: bal, pending: pendingAmt, addLabel: "Top Up Wallet", addOnclick: "accToggleFundWallet()", secondaryLabel: "Bank Transfer", secondaryOnclick: "accToggleFundWallet();accSelectFundMethod('manual')" });
 
     html += walQaRowHTML([
       { icon: "&#128179;", color: "var(--gold)", bg: "var(--gold-dim)", label: "Add Money", sub: "Instant top up", onclick: "accToggleFundWallet()" },
@@ -9534,41 +9550,13 @@ function accRenderPayments(body) {
 
     html += '<div class="fst" style="margin:.7rem 0 .25rem;padding-bottom:.3rem;font-size:1rem;display:flex;align-items:center;justify-content:space-between" id="acc-wal-tx-list"><span>Recent Transactions</span>' + (tx.length > 4 ? '<span class="wal-tx-viewall" onclick="walToggleTxAll(\'acc-wal\')" id="acc-wal-tx-viewall">View All</span>' : '') + '</div>';
     html += tx.length
-      ? '<div class="lcard" style="padding:.3rem 1.1rem"><div id="acc-wal-tx-visible">' + tx.slice(0, 4).map(cwTxRowHTML).join("") + '</div><div id="acc-wal-tx-rest" style="display:none">' + tx.slice(4, 20).map(cwTxRowHTML).join("") + '</div></div>'
+      ? '<div class="lcard" style="padding:.3rem 1.1rem"><div id="acc-wal-tx-visible">' + tx.slice(0, 4).map(walTxRowHTML).join("") + '</div><div id="acc-wal-tx-rest" style="display:none">' + tx.slice(4, 20).map(walTxRowHTML).join("") + '</div></div>'
       : '<div class="emst"><span class="ei">&#128179;</span>No transactions yet.</div>';
 
     html += '<div class="wal-secure"><span style="font-size:1.3rem">&#128274;</span><div><b>Your wallet is secure</b>All transactions are encrypted and your funds are safe with us.</div></div>';
 
     body.innerHTML = html;
-    if (_accAutoOpenFund) { _accAutoOpenFund = false; accToggleFundWallet(); }
   }).catch(function(e) { console.error(e); body.innerHTML = '<div class="emst"><span class="ei">&#9888;</span>Could not load payments.</div>'; });
-}
-
-// ── Customer "Payments & Wallet" specific hero + transaction row markup
-// (kept separate from the shared wal*HTML helpers above, which the hotel
-// partner "Wallet" tab also uses, so this styling only affects this page) ──
-function cwHeroHTML(scope, opts) {
-  var totalStr = "\u20a6" + Math.round(opts.total).toLocaleString();
-  return '<div class="cw-hero">' +
-    '<div class="cw-hero-top">' +
-      '<div class="cw-hero-lbl">Available Balance <button class="cw-eye" id="' + scope + '-eye" onclick="walEyeToggle(\'' + scope + '\')">&#128065;</button></div>' +
-      '<div class="cw-hero-illus">&#128176;</div>' +
-    '</div>' +
-    '<div class="cw-bal" id="' + scope + '-bal-val" data-real="' + totalStr + '" data-hidden="0">' + totalStr + '</div>' +
-    '<div class="cw-bal-cap">Total Balance</div>' +
-    '<div class="cw-hero-sub">Available \u20a6' + Math.round(opts.available).toLocaleString() + ' &nbsp;&middot;&nbsp; Pending \u20a6' + Math.round(opts.pending).toLocaleString() + '</div>' +
-    (opts.addOnclick ? '<button class="cw-hero-btn" onclick="' + opts.addOnclick + '">&#10133; ' + (opts.addLabel || "Top Up Wallet") + '</button>' : '') +
-    '</div>';
-}
-function cwTxRowHTML(it) {
-  var amtColor = it.positive ? "var(--green)" : "var(--red)";
-  var sign = it.positive ? "+" : "-";
-  var pending = /\(Pending\)/.test(it.title);
-  var pillClass = pending ? "pending" : "ok";
-  var pillLabel = pending ? "Pending" : "Successful";
-  return '<div class="cw-tx-row"><div class="cw-tx-ico" style="background:' + it.bg + ';color:' + it.color + '">' + it.icon + '</div>' +
-    '<div style="flex:1;min-width:0"><div class="cw-tx-title">' + esc(it.title) + '</div><div class="cw-tx-sub">' + esc(it.sub) + '</div></div>' +
-    '<div class="cw-tx-right"><div class="cw-tx-amt" style="color:' + amtColor + '">' + sign + '\u20a6' + Math.round(it.amount).toLocaleString() + '</div><span class="cw-tx-pill ' + pillClass + '">' + pillLabel + '</span></div></div>';
 }
 
 function fwPanelHTML() {
@@ -9839,8 +9827,19 @@ function accOpenChatThread(hotelId, hotelName) {
     '<div class="chat-box">' +
     '<div class="chat-head"><div class="chat-head-av">' + esc(hInitial) + '</div><div><div class="chat-head-name">' + esc(hotelName || "Hotel") + '</div><div class="chat-head-status">Online</div></div></div>' +
     '<div class="chat-msgs" id="acc-chat-msgs"><div class="emst"><span class="ei">&#8987;</span>Loading...</div></div>' +
-    '<div class="chat-input-row"><input type="text" id="acc-chat-input" placeholder="Type a message..." onkeypress="if(event.key===\'Enter\')accSendChatMessage()"/>' +
-    '<button class="chat-send-btn" onclick="accSendChatMessage()">&#10148;</button></div></div>';
+    '<div class="chat-input-row" id="acc-chat-input-row">' +
+    '<input type="file" accept="image/*" id="acc-chat-img-input" style="display:none" onchange="accSendChatImage(this.files[0])"/>' +
+    '<button class="chat-icon-btn" onclick="document.getElementById(\'acc-chat-img-input\').click()" title="Attach image">&#128206;</button>' +
+    '<input type="text" id="acc-chat-input" placeholder="Type a message..." onkeypress="if(event.key===\'Enter\')accSendChatMessage()"/>' +
+    '<button class="chat-icon-btn" id="acc-chat-mic-btn" onclick="accToggleChatRecording()" title="Record voice note">' + VOICE_NOTE_ICON + '</button>' +
+    '<button class="chat-send-btn" onclick="accSendChatMessage()">&#10148;</button></div>' +
+    '<div class="chat-rec-bar" id="acc-chat-recbar">' +
+    '<span class="chat-rec-dot"></span><span class="chat-rec-timer" id="acc-chat-rec-timer" style="display:inline-block">0:00</span>' +
+    '<div class="chat-rec-wave">' + chatWaveBarsHtml() + '</div>' +
+    '<span class="chat-rec-cancel-lbl">&#8592; Slide to cancel</span>' +
+    '<button class="chat-rec-trash" onclick="accCancelChatRecording()" title="Discard">&#128465;&#65039;</button>' +
+    '<button class="chat-icon-btn rec" onclick="accToggleChatRecording()" title="Stop and send">' + STOP_REC_ICON + '</button>' +
+    '</div></div>';
 
   db.collection("hotelChats").doc(tid).set({ unreadUser: false }, { merge: true }).catch(function() {});
   accLoadMenuBadges();
@@ -9868,6 +9867,93 @@ function accSendChatMessage() {
       lastMessage: text, lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "user", unreadHotel: true
     }, { merge: true });
   }).catch(function() { T("Error", "Could not send your message. Please try again."); });
+}
+function accSendChatImage(file) {
+  if (!file || !_accChatCurrent) return;
+  var tid = _accChatCurrent.tid;
+  var path = "hotelChats/" + tid + "/" + Date.now() + "_" + file.name;
+  storage.ref().child(path).put(file).then(function(snap) {
+    return snap.ref.getDownloadURL();
+  }).then(function(url) {
+    return db.collection("hotelChats").doc(tid).collection("messages").add({
+      sender: "user", type: "image", url: url, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }).then(function() {
+    return db.collection("hotelChats").doc(tid).set({
+      lastMessage: "Photo", lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "user", unreadHotel: true
+    }, { merge: true });
+  }).catch(function(err) {
+    console.error("Could not send image:", err);
+    T("Error", "Could not send the image. Please check your connection and try again.", 8000);
+  }).finally(function() {
+    var el = document.getElementById("acc-chat-img-input");
+    if (el) el.value = "";
+  });
+}
+var _accChatRecorder = null;
+var _accChatChunks = [];
+var _accChatRecording = false;
+var _accChatRecCancelled = false;
+function accShowChatRecBar(show) {
+  var row = document.getElementById("acc-chat-input-row");
+  var bar = document.getElementById("acc-chat-recbar");
+  if (row) row.style.display = show ? "none" : "flex";
+  if (bar) bar.classList.toggle("active", show);
+}
+function accToggleChatRecording() {
+  if (!_accChatCurrent) return;
+  var btn = document.getElementById("acc-chat-mic-btn");
+  if (_accChatRecording) { _accChatRecCancelled = false; _accChatRecorder.stop(); return; }
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+    _accChatChunks = [];
+    var mimeType = pickRecorderMimeType();
+    _accChatRecorder = mimeType ? new MediaRecorder(stream, { mimeType: mimeType }) : new MediaRecorder(stream);
+    _accChatRecorder.ondataavailable = function(e) { if (e.data.size > 0) _accChatChunks.push(e.data); };
+    _accChatRecorder.onstop = function() {
+      stream.getTracks().forEach(function(t) { t.stop(); });
+      _accChatRecording = false;
+      if (btn) { btn.classList.remove("rec"); btn.innerHTML = VOICE_NOTE_ICON; }
+      stopRecTimer("acc-chat-rec-timer");
+      accShowChatRecBar(false);
+      if (_accChatRecCancelled) return;
+      var blob = new Blob(_accChatChunks, { type: _accChatRecorder.mimeType || "audio/webm" });
+      if (blob.size < 500) { T("Too Short", "Hold the button a little longer to record a voice note."); return; }
+      accUploadChatAudio(blob);
+    };
+    _accChatRecorder.start();
+    _accChatRecording = true;
+    _accChatRecCancelled = false;
+    if (btn) { btn.classList.add("rec"); btn.innerHTML = STOP_REC_ICON; }
+    accShowChatRecBar(true);
+    startRecTimer("acc-chat-rec-timer");
+  }).catch(function() {
+    T("Microphone", "Could not access the microphone. Check browser permissions.");
+  });
+}
+function accCancelChatRecording() {
+  if (!_accChatRecording) return;
+  _accChatRecCancelled = true;
+  _accChatRecorder.stop();
+}
+function accUploadChatAudio(blob) {
+  if (!_accChatCurrent) return;
+  var tid = _accChatCurrent.tid;
+  var ext = blob.type.indexOf("mp4") !== -1 ? "m4a" : "webm";
+  var path = "hotelChats/" + tid + "/" + Date.now() + "_voice." + ext;
+  storage.ref().child(path).put(blob, { contentType: blob.type || "audio/webm" }).then(function(snap) {
+    return snap.ref.getDownloadURL();
+  }).then(function(url) {
+    return db.collection("hotelChats").doc(tid).collection("messages").add({
+      sender: "user", type: "audio", url: url, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }).then(function() {
+    return db.collection("hotelChats").doc(tid).set({
+      lastMessage: "Voice note", lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "user", unreadHotel: true
+    }, { merge: true });
+  }).catch(function(err) {
+    console.error("Could not send voice note:", err);
+    T("Error", "Could not send the voice note. Please check your connection and try again.", 8000);
+  });
 }
 
 // ═══════════════════════════════════════════
@@ -11084,6 +11170,10 @@ function hdOpenChatThread(tid, userName) {
   document.getElementById("hd-msg-thread-wrap").style.display = "block";
   document.getElementById("hd-msg-thread-title").textContent = userName || "Guest";
   document.getElementById("hd-chat-msgs").innerHTML = '<div class="empty">Loading...</div>';
+  var micBtn = document.getElementById("hd-chat-mic-btn"); if (micBtn) micBtn.innerHTML = VOICE_NOTE_ICON;
+  var waveEl = document.getElementById("hd-chat-wave"); if (waveEl) waveEl.innerHTML = chatWaveBarsHtml();
+  var stopBtn = document.querySelector("#hd-chat-recbar .chat-icon-btn.rec"); if (stopBtn) stopBtn.innerHTML = STOP_REC_ICON;
+  var hInitial = (userName || "G").trim().charAt(0).toUpperCase();
 
   db.collection("hotelChats").doc(tid).set({ unreadHotel: false }, { merge: true }).catch(function() {});
   hdLoadChatBadge();
@@ -11093,12 +11183,7 @@ function hdOpenChatThread(tid, userName) {
     var msgsEl = document.getElementById("hd-chat-msgs");
     if (!msgsEl) return;
     if (snap.empty) { msgsEl.innerHTML = '<div class="empty">No messages yet.</div>'; return; }
-    msgsEl.innerHTML = snap.docs.map(function(d) {
-      var m = d.data();
-      var mine = m.sender === "hotel";
-      var time = m.createdAt ? m.createdAt.toDate().toLocaleString([], { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
-      return '<div class="chat-bubble ' + (mine ? "mine" : "theirs") + '">' + esc(m.text) + '<div class="chat-bubble-time">' + time + '</div></div>';
-    }).join("");
+    msgsEl.innerHTML = chatMessagesHtml(snap.docs, "hotel", hInitial, "hd-chat");
     msgsEl.scrollTop = msgsEl.scrollHeight;
   }, function() {});
 }
@@ -11121,6 +11206,93 @@ function hdSendChatMessage() {
       lastMessage: text, lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "hotel", unreadUser: true
     }, { merge: true });
   }).catch(function() { T("Error", "Could not send your reply. Please try again."); });
+}
+function hdSendChatImage(file) {
+  if (!file || !_hdChatCurrentTid) return;
+  var tid = _hdChatCurrentTid;
+  var path = "hotelChats/" + tid + "/" + Date.now() + "_" + file.name;
+  storage.ref().child(path).put(file).then(function(snap) {
+    return snap.ref.getDownloadURL();
+  }).then(function(url) {
+    return db.collection("hotelChats").doc(tid).collection("messages").add({
+      sender: "hotel", type: "image", url: url, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }).then(function() {
+    return db.collection("hotelChats").doc(tid).set({
+      lastMessage: "Photo", lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "hotel", unreadUser: true
+    }, { merge: true });
+  }).catch(function(err) {
+    console.error("Could not send image:", err);
+    T("Error", "Could not send the image. Please check your connection and try again.", 8000);
+  }).finally(function() {
+    var el = document.getElementById("hd-chat-img-input");
+    if (el) el.value = "";
+  });
+}
+var _hdChatRecorder = null;
+var _hdChatChunks = [];
+var _hdChatRecording = false;
+var _hdChatRecCancelled = false;
+function hdShowChatRecBar(show) {
+  var row = document.getElementById("hd-chat-input-row");
+  var bar = document.getElementById("hd-chat-recbar");
+  if (row) row.style.display = show ? "none" : "flex";
+  if (bar) bar.classList.toggle("active", show);
+}
+function hdToggleChatRecording() {
+  if (!_hdChatCurrentTid) return;
+  var btn = document.getElementById("hd-chat-mic-btn");
+  if (_hdChatRecording) { _hdChatRecCancelled = false; _hdChatRecorder.stop(); return; }
+  navigator.mediaDevices.getUserMedia({ audio: true }).then(function(stream) {
+    _hdChatChunks = [];
+    var mimeType = pickRecorderMimeType();
+    _hdChatRecorder = mimeType ? new MediaRecorder(stream, { mimeType: mimeType }) : new MediaRecorder(stream);
+    _hdChatRecorder.ondataavailable = function(e) { if (e.data.size > 0) _hdChatChunks.push(e.data); };
+    _hdChatRecorder.onstop = function() {
+      stream.getTracks().forEach(function(t) { t.stop(); });
+      _hdChatRecording = false;
+      if (btn) { btn.classList.remove("rec"); btn.innerHTML = VOICE_NOTE_ICON; }
+      stopRecTimer("hd-chat-rec-timer");
+      hdShowChatRecBar(false);
+      if (_hdChatRecCancelled) return;
+      var blob = new Blob(_hdChatChunks, { type: _hdChatRecorder.mimeType || "audio/webm" });
+      if (blob.size < 500) { T("Too Short", "Hold the button a little longer to record a voice note."); return; }
+      hdUploadChatAudio(blob);
+    };
+    _hdChatRecorder.start();
+    _hdChatRecording = true;
+    _hdChatRecCancelled = false;
+    if (btn) { btn.classList.add("rec"); btn.innerHTML = STOP_REC_ICON; }
+    hdShowChatRecBar(true);
+    startRecTimer("hd-chat-rec-timer");
+  }).catch(function() {
+    T("Microphone", "Could not access the microphone. Check browser permissions.");
+  });
+}
+function hdCancelChatRecording() {
+  if (!_hdChatRecording) return;
+  _hdChatRecCancelled = true;
+  _hdChatRecorder.stop();
+}
+function hdUploadChatAudio(blob) {
+  if (!_hdChatCurrentTid) return;
+  var tid = _hdChatCurrentTid;
+  var ext = blob.type.indexOf("mp4") !== -1 ? "m4a" : "webm";
+  var path = "hotelChats/" + tid + "/" + Date.now() + "_voice." + ext;
+  storage.ref().child(path).put(blob, { contentType: blob.type || "audio/webm" }).then(function(snap) {
+    return snap.ref.getDownloadURL();
+  }).then(function(url) {
+    return db.collection("hotelChats").doc(tid).collection("messages").add({
+      sender: "hotel", type: "audio", url: url, createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }).then(function() {
+    return db.collection("hotelChats").doc(tid).set({
+      lastMessage: "Voice note", lastAt: firebase.firestore.FieldValue.serverTimestamp(), lastSender: "hotel", unreadUser: true
+    }, { merge: true });
+  }).catch(function(err) {
+    console.error("Could not send voice note:", err);
+    T("Error", "Could not send the voice note. Please check your connection and try again.", 8000);
+  });
 }
 
 function hdMarkAllNotifRead(silent) {
