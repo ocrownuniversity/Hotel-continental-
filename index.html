@@ -4215,38 +4215,53 @@ function adminLogin() {
   function resetBtn(){ if (btn) { btn.disabled = false; btn.textContent = &quot;Sign In&quot;; } }
 
   auth.signInWithEmailAndPassword(email, pass).then(function(cred){
-    if (email === SUPER_EMAIL) {
-      _isSuperAdmin = true; _currentSubAdmin = &quot;&quot;; _currentSubAdminPerms = [];
-      loginSuccess(&quot;Admin&quot;, &quot;Super Admin&quot;);
-      resetBtn();
-      return;
-    }
-    // Not the super admin — confirm this email is on the sub-admin allow-list
-    // before granting access to the dashboard. Looked up by document ID
-    // (doc id === username/email) rather than a where() query, because the
-    // Firestore rule for this collection only permits a signed-in user to
-    // read the single subadmins doc matching their own email — a where()
-    // query can&#x27;t be proven safe against that rule and gets rejected.
-    return db.collection(&quot;subadmins&quot;).doc(email).get().then(function(doc){
-      resetBtn();
-      if (doc.exists) {
-        var saData = doc.data();
-        var status = saData.status || &quot;active&quot;;
-        if (status === &quot;suspended&quot; || status === &quot;inactive&quot;) {
-          auth.signOut();
-          err.textContent = status === &quot;suspended&quot; ? &quot;This account has been suspended. Contact the super admin for access.&quot; : &quot;This account is inactive. Contact the super admin for access.&quot;;
-          err.classList.add(&quot;show&quot;);
-          return;
-        }
-        _isSuperAdmin = false; _currentSubAdmin = email;
-        _currentSubAdminPerms = saData.permissions || [];
-        loginSuccess(saData.name || email, saData.roleTitle || &quot;Staff Admin&quot;);
-        db.collection(&quot;subadmins&quot;).doc(email).update({ lastLogin: firebase.firestore.FieldValue.serverTimestamp() }).catch(function(){});
-      } else {
+    // A hotel partner has valid Firebase credentials too (they sign in
+    // through the main site's Account page), so a successful auth call here
+    // does not by itself mean this is an admin. Check the &quot;hotels&quot; collection
+    // by uid first and reject immediately with a clear, specific message —
+    // rather than letting it fall through to the generic subadmin lookup and
+    // a vaguer &quot;no admin access&quot; error.
+    return db.collection(&quot;hotels&quot;).doc(cred.user.uid).get().then(function(hdoc){
+      if (hdoc.exists) {
         auth.signOut();
-        err.textContent = &quot;This account has no admin access.&quot;;
+        resetBtn();
+        err.textContent = &quot;This is a hotel partner account. Please sign in from the main website&#x27;s Account page instead — not here.&quot;;
         err.classList.add(&quot;show&quot;);
+        return;
       }
+      if (email === SUPER_EMAIL) {
+        _isSuperAdmin = true; _currentSubAdmin = &quot;&quot;; _currentSubAdminPerms = [];
+        loginSuccess(&quot;Admin&quot;, &quot;Super Admin&quot;);
+        resetBtn();
+        return;
+      }
+      // Not the super admin — confirm this email is on the sub-admin allow-list
+      // before granting access to the dashboard. Looked up by document ID
+      // (doc id === username/email) rather than a where() query, because the
+      // Firestore rule for this collection only permits a signed-in user to
+      // read the single subadmins doc matching their own email — a where()
+      // query can&#x27;t be proven safe against that rule and gets rejected.
+      return db.collection(&quot;subadmins&quot;).doc(email).get().then(function(doc){
+        resetBtn();
+        if (doc.exists) {
+          var saData = doc.data();
+          var status = saData.status || &quot;active&quot;;
+          if (status === &quot;suspended&quot; || status === &quot;inactive&quot;) {
+            auth.signOut();
+            err.textContent = status === &quot;suspended&quot; ? &quot;This account has been suspended. Contact the super admin for access.&quot; : &quot;This account is inactive. Contact the super admin for access.&quot;;
+            err.classList.add(&quot;show&quot;);
+            return;
+          }
+          _isSuperAdmin = false; _currentSubAdmin = email;
+          _currentSubAdminPerms = saData.permissions || [];
+          loginSuccess(saData.name || email, saData.roleTitle || &quot;Staff Admin&quot;);
+          db.collection(&quot;subadmins&quot;).doc(email).update({ lastLogin: firebase.firestore.FieldValue.serverTimestamp() }).catch(function(){});
+        } else {
+          auth.signOut();
+          err.textContent = &quot;This account has no admin access.&quot;;
+          err.classList.add(&quot;show&quot;);
+        }
+      });
     });
   }).catch(function(e){
     resetBtn();
@@ -9240,7 +9255,14 @@ function confirmNewPassword() {
 
 function accRenderHeader() {
   var p = _accProfile || {};
-  document.getElementById("acc-name").textContent = p.name || "Guest";
+  var nameEl = document.getElementById("acc-name");
+  var nameText = p.name || "Guest";
+  nameEl.textContent = nameText;
+  // Long values (especially an email used as the display name) would
+  // otherwise wrap to 2-3 lines and blow out the card's height, so shrink
+  // the font as the text gets longer instead of letting it wrap that much.
+  var nlen = nameText.length;
+  nameEl.style.fontSize = nlen > 28 ? ".82rem" : nlen > 20 ? ".92rem" : nlen > 14 ? "1.02rem" : "1.15rem";
   var emailHidden = document.getElementById("acc-email"); if (emailHidden) emailHidden.textContent = p.email || "";
   var emailVis = document.getElementById("acc-email-vis"); if (emailVis) emailVis.textContent = p.email || "";
   var roleEl = document.getElementById("acc-role"); if (roleEl) roleEl.textContent = "Member";
