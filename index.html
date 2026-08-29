@@ -4214,7 +4214,34 @@ function adminLogin() {
   if (btn) { btn.disabled = true; btn.textContent = &quot;Signing in...&quot;; }
   function resetBtn(){ if (btn) { btn.disabled = false; btn.textContent = &quot;Sign In&quot;; } }
 
-  auth.signInWithEmailAndPassword(email, pass).then(function(cred){
+  // This admin panel and the main site&#x27;s Account page share the same
+  // Firebase project, and this page is embedded same-origin as the main
+  // site — so Firebase Auth&#x27;s cross-tab sync means the instant a hotel
+  // partner&#x27;s credentials succeed here (even for a moment before we sign
+  // them back out), the main site&#x27;s own login listener sees that sign-in
+  // and opens their hotel dashboard there. Signing out afterward doesn&#x27;t
+  // undo that. So a hotel account must never be allowed to authenticate on
+  // this page at all — check by email against the public &quot;hotels&quot; list
+  // first (readable without being signed in, same as the public hotel
+  // search) and reject before ever calling signInWithEmailAndPassword.
+  db.collection(&quot;hotels&quot;).where(&quot;ownerEmail&quot;, &quot;==&quot;, email).limit(1).get().then(function(snap){
+    if (!snap.empty) {
+      resetBtn();
+      err.textContent = &quot;This is a hotel partner account. Please sign in from the main website&#x27;s Account page instead — not here.&quot;;
+      err.classList.add(&quot;show&quot;);
+      return;
+    }
+    return continueAdminSignIn();
+  }).catch(function(){
+    // If the pre-check itself fails for some reason (offline, rules
+    // change, etc.) fall through to the normal flow rather than blocking
+    // legitimate admins — the uid-based hotel check right after sign-in
+    // below still catches hotel accounts as a second line of defense.
+    return continueAdminSignIn();
+  });
+
+  function continueAdminSignIn(){
+  return auth.signInWithEmailAndPassword(email, pass).then(function(cred){
     // A hotel partner has valid Firebase credentials too (they sign in
     // through the main site's Account page), so a successful auth call here
     // does not by itself mean this is an admin. Check the &quot;hotels&quot; collection
@@ -4284,6 +4311,7 @@ function adminLogin() {
     }
     err.classList.add(&quot;show&quot;);
   });
+  }
 }
 
 function loginSuccess(name, role) {
